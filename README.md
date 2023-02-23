@@ -1,2 +1,2 @@
 # BeHealty
-A mobile project designed to approach clients and professional from health 
+A mobile project designed to approach clients that searches for a healty life and professional from health 
