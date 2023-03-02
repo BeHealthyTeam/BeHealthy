@@ -5,11 +5,11 @@ import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons'
 
 //import diarioNutricionalStyle from '../../styles/stack/diarioNutricionalStyle';
-import formsStyle from "../../styles/forms/formsStyle";
-import api from "../../services/api"
-import SelectRefeicoes from "../../modals/selectRefeicoes";
-import Refeicao from "../../components/objects/refeicao";
-import AboutQuantidadeModal from "../../modals/aboutQuantidadeModal";
+import formsStyle from "../../../styles/forms/formsStyle";
+import api from "../../../services/api";
+import SelectRefeicoes from "../../../modals/selectRefeicoes";
+import Refeicao from "../../../components/objects/refeicao";
+import AboutQuantidadeModal from "../../../modals/aboutQuantidadeModal";
 
 function Item({ id, title, selected, onSelect }) {
   return (
@@ -25,7 +25,7 @@ function Item({ id, title, selected, onSelect }) {
   );
 }
 
-export default function DiarioNutricional({navigation}) {
+export default function NutritionDiary({navigation}) {
   const { control, handleSubmit, formState: { errors } } = useForm({}); // handle inputs to send
   const [aboutQuantidade, setAboutQuantidade] = useState(false);
   const [selectRefeicoes, setSelectRefeicoes] = useState(false);

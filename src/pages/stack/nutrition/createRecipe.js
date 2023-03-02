@@ -3,13 +3,13 @@ import { View, Text, Pressable, TextInput, SafeAreaView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 
-import api from "../../services/api";
-import Alimento from "../../components/objects/alimento";
-import MultiSelectFoods from "../../modals/multiselectFoods";
+import api from "../../../services/api";
+import Alimento from "../../../components/objects/alimento";
+import MultiSelectFoods from "../../../modals/multiselectFoods";
 
-import formsStyle from "../../styles/forms/formsStyle";
+import formsStyle from "../../../styles/forms/formsStyle";
 
-export default function CadastrarReceita({ navigation }) {
+export default function CreateRecipe({ navigation }) {
 
     const { control, handleSubmit, formState: { errors } } = useForm({}); // handle inputs to send
     const [multiSelectModal, setMultiSelectModal] = useState(false);

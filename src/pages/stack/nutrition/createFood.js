@@ -1,21 +1,21 @@
 import React, {useState} from "react";
 import { View, Text, Pressable, TextInput, Button, SafeAreaView} from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import api from "../../services/api";
-import formsCadAlimentoStyle from "../../styles/forms/formCadAlimentoStyle";
-import SelectUnityCadAlimentoModal from "../../modals/selectUnityCadAlimentoModal";
-import Caloria from "../../components/objects/cadastroAlimento/calorias";
-import Fibras from "../../components/objects/cadastroAlimento/fibras";
-import AcidosGraxos from "../../components/objects/cadastroAlimento/acidosGraxos";
-import Macronutrientes from "../../components/objects/cadastroAlimento/macronutrientes";
-import Minerais from "../../components/objects/cadastroAlimento/minerais";
-import Vitaminas from "../../components/objects/cadastroAlimento/vitaminas";
+import api from "../../../services/api";
+import formsCadAlimentoStyle from "../../../styles/forms/formCadAlimentoStyle";
+import SelectUnityCadAlimentoModal from "../../../modals/selectUnityCadAlimentoModal";
+import Caloria from "../../../components/objects/cadastroAlimento/calorias";
+import Fibras from "../../../components/objects/cadastroAlimento/fibras";
+import AcidosGraxos from "../../../components/objects/cadastroAlimento/acidosGraxos";
+import Macronutrientes from "../../../components/objects/cadastroAlimento/macronutrientes";
+import Minerais from "../../../components/objects/cadastroAlimento/minerais";
+import Vitaminas from "../../../components/objects/cadastroAlimento/vitaminas";
 
 
-export default function CadastrarAlimento({navigation}){
+export default function CreateFood({navigation}){
 
     const {control, handleSubmit, formState: {errors}} = useForm({});
     const [unidadeModal, setUnidadeModal] = useState(false);

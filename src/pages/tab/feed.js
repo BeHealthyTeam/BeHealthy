@@ -1,12 +1,11 @@
 import {React, useState, useEffect } from "react"
 import {StatusBar, ScrollView, View} from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
-import TopFiveCard from "../../components/util/topFiveCard"
 
 import api from "../../services/api"
 import tabPagesBackgroundStyle from "../../styles/pages/tab/tabPagesBackgroundStyle"
+import TopFiveCard from "../../components/utils/topFiveCard"
 
-const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 64
 
 export default function Feed({navigation}){
 

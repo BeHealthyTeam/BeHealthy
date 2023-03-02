@@ -1,11 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import { View, SafeAreaView, Text, StatusBar, Alert, TextInput, Button} from "react-native";
 import { useForm, Controller } from "react-hook-form";
-//import styles from "../../styles/pages";
-
-
-const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 64
-const statusBarWidth = StatusBar.currentWidth ? StatusBar.currentWidth : 64
 
 export default function Calculate({navigation}){
 

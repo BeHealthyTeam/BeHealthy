@@ -12,11 +12,11 @@ import Menu from './src/pages/tab/menu';
 import Contacts from './src/pages/tab/contacts';
 
 // STACK clicked pages
-import Calculate from './src/pages/stack/calculate';
-import CadastrarCliente from './src/pages/stack/cadastrarCliente';
-import CadastrarAlimento from './src/pages/stack/cadastrarAlimento';
-import CadastrarReceita from './src/pages/stack/cadastrarReceita';
-import DiarioNutricional from './src/pages/stack/diarioNutricional';
+import Calculate from './src/pages/stack/nutrition/calculate';
+import CreateFood from './src/pages/stack/nutrition/createFood';
+import CreateRecipe from './src/pages/stack/nutrition/createRecipe';
+import CreateClients from './src/pages/stack/clients/createClients';
+import NutritionDiary from './src/pages/stack/nutrition/nutritionDiary';
 
 // TOP TAB BAR style
 import tabBar from './src/styles/tabBar/tabBar';
@@ -89,7 +89,7 @@ export default function App(){
               options={{ headerShown: false, tabBarLabel: 'Root',
               }}
             />
-            <Stack.Screen name="CadastrarCliente" component={CadastrarCliente}
+            <Stack.Screen name="CreateClients" component={CreateClients}
               options={{
                 title: "Cadastro de Cliente",
                 minHeight: 10,
@@ -105,7 +105,7 @@ export default function App(){
                 title: "Calcular IMC",
               }}
             />
-            <Stack.Screen name="CadastrarAlimento" component={CadastrarAlimento} 
+            <Stack.Screen name="CreateFood" component={CreateFood} 
               options={{ 
                 headerStyle: { 
                   minHeight: 10,       
@@ -113,14 +113,14 @@ export default function App(){
                 title: "Cadastro de Alimento",  
               }}
             />
-            <Stack.Screen name="CadastrarReceita" component={CadastrarReceita} 
+            <Stack.Screen name="CreateRecipe" component={CreateRecipe} 
               options={{ headerStyle: {
                   minHeight: 10,
                 },
                 title: "Cadastro de Receita",
               }}
             />
-            <Stack.Screen name="DiarioNutricional" component={DiarioNutricional} 
+            <Stack.Screen name="NutritionDiary" component={NutritionDiary} 
               options={{ headerStyle: {
                   minHeight: 10,
                 },

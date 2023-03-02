@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, Alert, TextInput, Button, SafeAreaView} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 
-import api from "../../services/api";
-import formsStyle from "../../styles/forms/formsStyle.js";
+import api from "../../../services/api";
+import formsStyle from "../../../styles/forms/formsStyle.js";
 
-export default function CadastrarCliente({navigation}){
+export default function CreateClients({navigation}){
 
     const {control, handleSubmit, formState: {errors}} = useForm({})
     async function handleValues(data){
