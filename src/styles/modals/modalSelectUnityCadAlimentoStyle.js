@@ -1,7 +1,7 @@
 import { StyleSheet, StatusBar, Dimensions} from "react-native";
 import { useFonts, Montserrat_900Black_Italic, Montserrat_200ExtraLight} from "expo-font";
 
-import formsCadAlimentoStyle from "../forms/formCadAlimentoStyle";
+import formsCadAlimentoStyle from "../forms/formCreateStyle";
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 64
 const statusBarWidth = StatusBar.currentWidth ? StatusBar.currentWidth : 64
 

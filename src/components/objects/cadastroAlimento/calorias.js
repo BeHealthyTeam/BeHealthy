@@ -1,18 +1,19 @@
 import { Controller } from "react-hook-form"
 import { View, Text, TextInput} from "react-native"
-import formsStyle from "../../../styles/forms/formsStyle"
+
+import formSectionStyle from "../../../styles/forms/formSectionStyle"
 
 export default function Caloria(props){
 return(
-    <View style={formsStyle.itemsContent}>
-        <View style={formsStyle.itemRow}>
-            <Text style = { formsStyle.label}>Energia (Kcal):</Text>
+    <View style={formSectionStyle.itemsContent}>
+        <View style={formSectionStyle.itemRow}>
+            <Text style = {formSectionStyle.label}>Energia (Kcal):</Text>
             <Controller
                 control={props.control}
                 name="energia"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
-                        style = {formsStyle.input}
+                        style = {formSectionStyle.input}
                         onChangeText = {onChange}
                         onBlur = {onBlur}
                         value = {value}

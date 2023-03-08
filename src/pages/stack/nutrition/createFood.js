@@ -1,18 +1,13 @@
 import React, {useState} from "react";
-import { View, Text, Pressable, TextInput, Button, SafeAreaView} from "react-native";
+import { View, Text, Pressable, TextInput} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
-import Ionicons from '@expo/vector-icons/Ionicons';
 
 import api from "../../../services/api";
-import formsCadAlimentoStyle from "../../../styles/forms/formCadAlimentoStyle";
+import formCreateStyle from "../../../styles/forms/formCreateStyle";
+import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import SelectUnityCadAlimentoModal from "../../../modals/selectUnityCadAlimentoModal";
-import Caloria from "../../../components/objects/cadastroAlimento/calorias";
-import Fibras from "../../../components/objects/cadastroAlimento/fibras";
-import AcidosGraxos from "../../../components/objects/cadastroAlimento/acidosGraxos";
-import Macronutrientes from "../../../components/objects/cadastroAlimento/macronutrientes";
-import Minerais from "../../../components/objects/cadastroAlimento/minerais";
-import Vitaminas from "../../../components/objects/cadastroAlimento/vitaminas";
+import CreateFoodSection from "../../../components/utils/createFoodSections";
 
 
 export default function CreateFood({navigation}){
@@ -59,170 +54,104 @@ export default function CreateFood({navigation}){
         }).then(function(response){console.log(response)}).catch(function (error) {
             console.error(error.message);
           });
+          navigation.navigate('Feed')
     }
     return(
-        <SafeAreaView style={formsCadAlimentoStyle.container}>
-            <View style = {formsCadAlimentoStyle.content}>
-                <ScrollView showsVerticalScrollIndicator={false} style = {formsCadAlimentoStyle.scrollStyle}>
-                    <View style = {formsCadAlimentoStyle.descritpionItems}>
-                        <View style={formsCadAlimentoStyle.itemRow}>
-                            <View style={formsCadAlimentoStyle.itemColumnName}>
-                                <Text style = { formsCadAlimentoStyle.labelName}>Nome do Alimento:</Text>
+        <View style={formsBackgroundStyle.background}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+            <View style = {formsBackgroundStyle.container}>
+                    <View style = {formCreateStyle.formContainer}>
+                        <View style={formCreateStyle.itemRow}>
+                            <View style={formCreateStyle.itemColumnName}>
                                 <Controller
                                     control={control}
                                     name="nome"
                                     render={({ field: { onChange, onBlur, value} })=>(
                                         <TextInput
-                                            style = {formsCadAlimentoStyle.inputRow}
+                                            style = {formCreateStyle.inputRow}
                                             onChangeText = {onChange}
                                             onBlur = {onBlur}
                                             value = {value}
+                                            placeholder = "Nome do Alimento"
                                         />
                                     )}
                                 />
                             </View>
-                            <View style={formsCadAlimentoStyle.itemColumnUnity}>
-                                <Text style = {formsCadAlimentoStyle.labelName}>Unidade:</Text>
-                                <Pressable
-                                    style={formsCadAlimentoStyle.inputPressableField}
-                                    onPress={() => setUnidadeModal(!unidadeModal)}
-                                >
-                                    <Controller
-                                    control={control}
-                                    name="unidade"
-                                    render={({ field: { onChange, onBlur, value} })=>(
-                                        <TextInput
-                                            style = {formsCadAlimentoStyle.unidadeLabel}
-                                            editable={false}
-                                            value = {unidadeValue}
-                                            
-                                        />
-                                    )}
-                                />
-                                </Pressable>
-                            </View>
+                            <Pressable
+                                style={formCreateStyle.inputPressableField}
+                                onPress={() => setUnidadeModal(!unidadeModal)}
+                            >
+                                <Controller
+                                control={control}
+                                name="unidade"
+                                render={({ field: { onChange, onBlur, value} })=>(
+                                    <TextInput
+                                        style = {formCreateStyle.unidadeLabel}
+                                        editable={false}
+                                        value = {unidadeValue}
+                                        placeholder = "Unidade"
+                                    />
+                                )}
+                            />
+                            </Pressable>
                         </View>
                     </View>
-                    <View style={formsCadAlimentoStyle.nutrientsSections}>
-                    
-                    {/* CALORIAS */}                    
-                        <Pressable
-                        onPress={
-                            () => setShowCaloria(!showCaloria)
-                        }
-                        >
-                            <View style = {formsCadAlimentoStyle.rowDirection}>
-                                <Text style={formsCadAlimentoStyle.sectionTitle}>CALORIAS</Text>
-                                <Ionicons name={showCaloria ? "chevron-down-outline" : "chevron-forward-outline"} size={20}/>
-                            </View>
-                        </Pressable>
-                        {
-                            showCaloria ? 
-                            <View style={formsCadAlimentoStyle.itemRow}>
-                                <Caloria control = {control} />
-                            </View> : <></>
-                        }
-                    {/* FIBRAS */}
-                        <Pressable
-                        onPress={
-                            () => setShowFibras(!showFibras)
-                        }
-                        >
-                            <View style = {formsCadAlimentoStyle.rowDirection}>
-                                <Text style={formsCadAlimentoStyle.sectionTitle}>FIBRAS</Text>
-                                <Ionicons name={showFibras ? "chevron-down-outline" : "chevron-forward-outline"}size={20}/>
-                            </View>
-                        </Pressable>
-                        {
-                            showFibras ? 
-                            <View style={formsCadAlimentoStyle.itemRow}>
-                                <Fibras control = {control} />
-                            </View> : <></>
-                        }
-                    {/* ACIDOS GRAXOS */}
-                        <Pressable
-                        onPress={
-                            () => setShowAcidosGraxos(!showAcidosGraxos)
-                        }
-                        >
-                            <View style = {formsCadAlimentoStyle.rowDirection}>
-                                <Text style={formsCadAlimentoStyle.sectionTitle}>ÁCIDOS GRAXOS</Text>
-                                <Ionicons name={showAcidosGraxos ? "chevron-down-outline" : "chevron-forward-outline"}size={20}/>
-                            </View>
-                        </Pressable>
-                        {
-                            showAcidosGraxos ? 
-                            <View style={formsCadAlimentoStyle.itemRow}>
-                                <AcidosGraxos control = {control} />
-                            </View> : <></>
-                        }
-                    {/* MACRONUTRIENTES */}
-                        <Pressable
-                        onPress={
-                            () => setShowMacroNutrientes(!showMacroNutrientes)
-                        }
-                        >
-                            <View style = {formsCadAlimentoStyle.rowDirection}>
-                                <Text style={formsCadAlimentoStyle.sectionTitle}>MACRONUTRIENTES</Text>
-                                <Ionicons name={showMacroNutrientes ? "chevron-down-outline" : "chevron-forward-outline"}size={20}/>
-                            </View>
-                        </Pressable>
-                        {
-                            showMacroNutrientes ? 
-                            <View style={formsCadAlimentoStyle.itemRow}>
-                                <Macronutrientes control = {control} />
-                            </View> : <></>
-                        }
-                    {/* MINERAIS */}
-                        <Pressable
-                        onPress={
-                            () => setShowMinerais(!showMinerais)
-                        }
-                        >
-                            <View style = {formsCadAlimentoStyle.rowDirection}>
-                                <Text style={formsCadAlimentoStyle.sectionTitle}>MINERAIS</Text>
-                                <Ionicons name={showMinerais ? "chevron-down-outline" : "chevron-forward-outline"}size={20}/>
-                            </View>
-                        </Pressable>
-                        {
-                            showMinerais ? 
-                            <View style={formsCadAlimentoStyle.itemRow}>
-                                <Minerais control = {control} />
-                            </View> : <></>
-                        }
-                    {/* VITAMINAS */}
-                    <Pressable
-                        onPress={
-                            () => setShowVitaminas(!showVitaminas)
-                        }
-                        >
-                            <View style = {formsCadAlimentoStyle.rowDirection}>
-                                <Text style={formsCadAlimentoStyle.sectionTitle}>VITAMINAS</Text>
-                                <Ionicons name={showVitaminas ? "chevron-down-outline" : "chevron-forward-outline"}size={20}/>
-                            </View>
-                        </Pressable>
-                        {
-                            showVitaminas ? 
-                            <View style={formsCadAlimentoStyle.itemRow}>
-                                <Vitaminas control = {control} />
-                            </View> : <></>
-                        }
+                    <View style={formCreateStyle.nutrientsSections}>
+                                      
+                        <CreateFoodSection
+                            setOpenSection = {setShowCaloria}
+                            openSection = {showCaloria}
+                            sectionTitle = "CALORIAS"
+                            control = {control}
+                        />
+                        <CreateFoodSection
+                            setOpenSection = {setShowFibras}
+                            openSection = {showFibras}
+                            sectionTitle = "FIBRAS"
+                            control = {control}
+                        />
+                        <CreateFoodSection
+                            setOpenSection = {setShowAcidosGraxos}
+                            openSection = {showAcidosGraxos}
+                            sectionTitle = "ÁCIDOS GRAXOS"
+                            control = {control}
+                        />
+                        <CreateFoodSection
+                            setOpenSection = {setShowMacroNutrientes}
+                            openSection = {showMacroNutrientes}
+                            sectionTitle = "MACRONUTRIENTES"
+                            control = {control}
+                        />
+                        <CreateFoodSection
+                            setOpenSection = {setShowMinerais}
+                            openSection = {showMinerais}
+                            sectionTitle = "MINERAIS"
+                            control = {control}
+                        />
+                        <CreateFoodSection
+                            setOpenSection = {setShowVitaminas}
+                            openSection = {showVitaminas}
+                            sectionTitle = "VITAMINAS"
+                            control = {control}
+                        />
                     </View>
-                    </ScrollView>
                 </View>
+                
                 <Pressable
-                    style={formsCadAlimentoStyle.pressableText}
+                    style={formsBackgroundStyle.pressableText}
                     onPress={handleSubmit(handleValues)}
                 >
-                    <Text style = {formsCadAlimentoStyle.submitText}>Cadastrar</Text>
+                    <Text style = {formsBackgroundStyle.submitText}>Cadastrar</Text>
                 </Pressable>
+                
                 <SelectUnityCadAlimentoModal 
                     unidadeModal ={unidadeModal} 
                     setUnidadeModal={setUnidadeModal}
                     unidadeValue = {unidadeValue}
                     setUnidadeValue = {setUnidadeValue}
                 />
-        </SafeAreaView>
+            </ScrollView>
+        </View>
         
     )
 }

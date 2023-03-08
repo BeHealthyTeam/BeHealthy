@@ -4,20 +4,20 @@ import { useFonts, Montserrat_900Black_Italic, Montserrat_200ExtraLight} from "e
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 64
 const statusBarWidth = StatusBar.currentWidth ? StatusBar.currentWidth : 64
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
+const mobileWindow = Dimensions.get("window");
+const Screen = Dimensions.get("screen");
 
 const alimentoObjectStyle = StyleSheet.create({
 
-    item:{
-        backgroundColor: "pink",
-        paddingVertical: 10,
-        borderRadius: 10,
+    container:{
         flex: 1,
-        marginVertical: 10,
         flexDirection: "row",
-        justifyContent: "space-between"
+    },
+    item:{
+        paddingVertical: 5,
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "flex-end"
     },
 
     label:{
@@ -25,17 +25,20 @@ const alimentoObjectStyle = StyleSheet.create({
         fontSize: 15,
         marginBottom: 5,
         paddingHorizontal: 10,
+        color: "white",
+        fontWeight: "bold",
+        alignSelf: "center",
     },
     qtdInput:{
-        backgroundColor: "white",
-        marginHorizontal: 10,
-        width: windowWidth*0.15,
-        paddingStart: 3,
-        borderRadius: 5,
-    }
-    
-
-
+        fontSize: 15,
+        borderRadius: 10,
+        borderWidth: 1,
+        paddingHorizontal: 7,
+        width: mobileWindow.width*0.15,
+        height: mobileWindow.height*0.04,
+        backgroundColor: 'white',
+        elevation: 3,
+    },
 })
 
 export default alimentoObjectStyle;

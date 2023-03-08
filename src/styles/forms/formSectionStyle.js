@@ -4,11 +4,11 @@ import { useFonts, Montserrat_900Black_Italic, Montserrat_200ExtraLight} from "e
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 64
 const statusBarWidth = StatusBar.currentWidth ? StatusBar.currentWidth : 64
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const mobileWindow = Dimensions.get("window");
+const Screen = Dimensions.get("screen");
 
 
-const formsStyle = StyleSheet.create({
+const formSectionStyle = StyleSheet.create({
 
     container:{
         backgroundColor: "#007334",
@@ -22,7 +22,7 @@ const formsStyle = StyleSheet.create({
         paddingStart: 20,
         paddingEnd: 30,
         paddingVertical: 10,
-        marginHorizontal: windowWidth-430,
+        marginHorizontal: mobileWindow.width*0.1,
         marginVertical: 20,
         borderRadius: 10,
         elevation: 1,
@@ -34,6 +34,7 @@ const formsStyle = StyleSheet.create({
     itemRow:{
         flexDirection: "row",
         justifyContent: "space-between",
+        paddingVertical: 5,
     },
     itemColumn:{
         flexDirection: "column",
@@ -43,9 +44,9 @@ const formsStyle = StyleSheet.create({
     label:{
         fontSize: 15,
         marginBottom: 5,
-        paddingStart: 2,
-        paddingTop: 10,
-    
+        paddingTop: 5,
+        fontWeight: "bold",
+        color: "white",
     },
     labelName:{
         fontSize: 15,
@@ -55,25 +56,24 @@ const formsStyle = StyleSheet.create({
     },
     inputRow:{
         fontSize: 15,
-        width: "100%",
         borderRadius: 10,
         borderWidth: 1,
         padding: 7,
         backgroundColor: 'white',
-
     },
     input:{
         fontSize: 15,
         borderRadius: 10,
         borderWidth: 1,
-        padding: 7,
-        width: 70,
+        paddingHorizontal: 7,
+        width: mobileWindow.width*0.15,
+        height: mobileWindow.height*0.04,
         backgroundColor: 'white',
+        elevation: 3,
     },
     rowContent:{
         flexDirection: "row",
         paddingBottom: 10,
-        paddingTop: 7,
     },
     columnContent:{
         flexDirection: "column",
@@ -84,50 +84,27 @@ const formsStyle = StyleSheet.create({
     scrollStyle:{
         width: "100%",
     },
-    pressableText:{
-        backgroundColor: "skyblue",
-        borderRadius: 10,
-    },
-    submitText:{
-        paddingTop: -10,
-        fontSize: 20,
-        alignSelf: "center",
-    },
-    pressableAddFoodsToRecipe:{
-        backgroundColor: "white",
-        borderRadius: 10,
-        borderWidth: 1,
-        height: 45,
-        justifyContent: "center",
-    },
-    inputPressableField:{
-        fontSize: 15,
-        paddingStart: 5,
-        color: "grey",
-        backgroundColor: 'white',
-    },
     itemsContent:{
-        backgroundColor: "lightgreen",
-        padding: 5,
+        backgroundColor: "#4E8E4D",
+        paddingHorizontal: 20,
+        paddingVertical: 5,
         borderRadius: 10,
-        width: windowWidth-150,
-        marginStart: windowHeight*0.05
-    },
-    titleQuantidade: {
-        flex:  1,
-        marginTop: 10,
-        marginBottom: 5,
-        flexDirection: "row",
-        justifyContent: "flex-end",
+        maxWidth: mobileWindow.width*0.8,
+        marginStart: mobileWindow.width*0.04,
+        elevation: 5,
+        flex: 0.95,
     },
     labelQuantidade:{
         fontSize: 15,
     },
-    iconQuantidade:{
-        color: "brown",
-    }
+    pressableAddFoodsToRecipe:{
+        width: "100%",
+        height: 40,
+        borderWidth: 1,
+        borderRadius: 10,
+    },
 
 
 })
 
-export default formsStyle;
+export default formSectionStyle;

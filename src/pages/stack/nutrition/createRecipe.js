@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, TextInput, SafeAreaView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import api from "../../../services/api";
 import Alimento from "../../../components/objects/alimento";
 import MultiSelectFoods from "../../../modals/multiselectFoods";
 
-import formsStyle from "../../../styles/forms/formsStyle";
+import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
+import formCreateStyle from "../../../styles/forms/formCreateStyle";
 
 export default function CreateRecipe({ navigation }) {
 
@@ -27,16 +29,15 @@ export default function CreateRecipe({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={formsStyle.container}>
-            <View style={formsStyle.content}>
+        <SafeAreaView style={formsBackgroundStyle.background}>
+            <View style={formsBackgroundStyle.container}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <Text style={formsStyle.label}>Nome:</Text>
                     <Controller
                         control={control}
                         name="name"
                         render={({ field: { onChange, onBlur, value } }) => (
                             <TextInput
-                                style={formsStyle.inputRow}
+                                style={formCreateStyle.inputRow}
                                 onChangeText={onChange}
                                 onBlur={onBlur}
                                 value={value}
@@ -44,28 +45,40 @@ export default function CreateRecipe({ navigation }) {
                             />
                         )}
                     />
-                    <Text style={formsStyle.label}>Adicionar Alimentos:</Text>
                     <Pressable
-                        style={formsStyle.pressableAddFoodsToRecipe}
+                        style={formCreateStyle.pressableAddFoodsToRecipe}
                         onPress={() => setMultiSelectModal(!multiSelectModal)}
                         title="submit"
                     >
-                        <Text style={formsStyle.inputPressableField}></Text>
+                        <Text style={formCreateStyle.selectItemsLabel}>Selecione os ingredientes</Text>
                     </Pressable>
-                    <Text style={formsStyle.label}>Selecionados:</Text>
-                    {
-                    ingredientes.length > 0 ? 
-                        ingredientes.map(
-                            food => {
-                                return <Alimento key={food.alimento.id} food={food.alimento} 
-                                ingredientes={ingredientes} setIngredientes={setIngredientes}
-                                />
-                            }
-                        )
-                    
-                    :<Text>Nenhum alimento selecionado</Text>
-                    }
-                    
+                    <Text style={formCreateStyle.label}>Selecionados:</Text>
+                    <View style={formCreateStyle.selectedContainer}>
+                        {
+                        ingredientes.length > 0 ?
+                            <View style={formCreateStyle.qtdHelpContainer}>
+                                <Text style={formCreateStyle.qtdLabel}>QTD.</Text>
+                                <Pressable
+                                onPress = {() => console.log("aaaaaaaaa")}
+                                style = {formCreateStyle.iconPressable}
+                                >
+                                    <Ionicons name="create-outline" size={18} style={formCreateStyle.iconLabel}/>
+                                </Pressable>
+                            </View>
+                            : <></>
+                        }
+                        {
+                        ingredientes.length > 0 ? 
+                            ingredientes.map(
+                                food => {
+                                    return <Alimento key={food.alimento.id} food={food.alimento} 
+                                    ingredientes={ingredientes} setIngredientes={setIngredientes}
+                                    />
+                                }
+                            )
+                        :<Text>Nenhum alimento selecionado</Text>
+                        }
+                    </View>
                 </ScrollView>
 
                 <MultiSelectFoods
@@ -76,13 +89,13 @@ export default function CreateRecipe({ navigation }) {
                 />
             </View>
             <Pressable
-                style={formsStyle.pressableText}
+                style={formsBackgroundStyle.pressableText}
                 onPress={
                     handleSubmit(handleValues)
                 }
                 title="submit"
             >
-                <Text style={formsStyle.submitText}>Cadastrar</Text>
+                <Text style={formsBackgroundStyle.submitText}>Cadastrar</Text>
             </Pressable>
 
 

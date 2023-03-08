@@ -3,7 +3,7 @@ import { View, Text, Alert, TextInput, Button, SafeAreaView} from "react-native"
 import { useForm, Controller } from "react-hook-form";
 
 import api from "../../../services/api";
-import formsStyle from "../../../styles/forms/formsStyle.js";
+import formCreateStyle from "../../../styles/forms/formCreateStyle";
 
 export default function CreateClients({navigation}){
 
@@ -22,16 +22,16 @@ export default function CreateClients({navigation}){
           });
     }
     return(
-        <SafeAreaView style={formsStyle.container}>
-            <View style = {formsStyle.content}>
+        <SafeAreaView style={formCreateStyle.container}>
+            <View style = {formCreateStyle.content}>
 
-                <Text style = { formsStyle.label}> Nome:</Text>
+                <Text style = { formCreateStyle.label}> Nome:</Text>
                 <Controller
                     control={control}
                     name="name"
                     render={({ field: { onChange, onBlur, value} })=>(
                         <TextInput
-                            style = {formsStyle.inputRow}
+                            style = {formCreateStyle.inputRow}
                             onChangeText = {onChange}
                             onBlur = {onBlur}
                             value = {value}
@@ -40,13 +40,13 @@ export default function CreateClients({navigation}){
                     )}
                 />
             
-                    <Text style = { formsStyle.label}> E-mail:</Text>
+                    <Text style = { formCreateStyle.label}> E-mail:</Text>
                     <Controller
                         control={control}
                         name="email"
                         render={({ field: { onChange, onBlur, value} })=>(
                             <TextInput
-                                style = {formsStyle.inputRow}
+                                style = {formCreateStyle.inputRow}
                                 onChangeText = {onChange}
                                 onBlur = {onBlur}
                                 value = {value}
@@ -55,16 +55,16 @@ export default function CreateClients({navigation}){
                         )}
                     />
 
-                <View style = {formsStyle.rowContent}>
-                    <View style = {formsStyle.columnContent}> 
-                    <Text style = {formsStyle.label}>Idade:</Text>
+                <View style = {formCreateStyle.rowContent}>
+                    <View style = {formCreateStyle.columnContent}> 
+                    <Text style = {formCreateStyle.label}>Idade:</Text>
                       
                         <Controller
                             control={control}
                             name="age"
                             render={({ field: { onChange, onBlur, value} })=>(
                                 <TextInput
-                                    style = {formsStyle.input}
+                                    style = {formCreateStyle.input}
                                     onChangeText = {onChange}
                                     onBlur = {onBlur}
                                     value = {value}
@@ -75,14 +75,14 @@ export default function CreateClients({navigation}){
                         />
                     </View>
 
-                    <View style = {formsStyle.columnContent}>
-                        <Text style = { formsStyle.label}>Peso:</Text>
+                    <View style = {formCreateStyle.columnContent}>
+                        <Text style = { formCreateStyle.label}>Peso:</Text>
                         <Controller
                             control={control}
                             name="weight"
                             render={({ field: { onChange, onBlur, value} })=>(
                                 <TextInput
-                                    style = {formsStyle.input}
+                                    style = {formCreateStyle.input}
                                     onChangeText = {onChange}
                                     onBlur = {onBlur}
                                     value = {value}
@@ -93,14 +93,14 @@ export default function CreateClients({navigation}){
                         />
                     </View>
 
-                    <View style = {formsStyle.columnContent}>
-                        <Text style = {formsStyle.label}>Altura(cm):</Text>
+                    <View style = {formCreateStyle.columnContent}>
+                        <Text style = {formCreateStyle.label}>Altura(cm):</Text>
                         <Controller
                             control={control}
                             name="height"
                             render={({ field: { onChange, onBlur, value} })=>(
                                 <TextInput
-                                    style = {formsStyle.input}
+                                    style = {formCreateStyle.input}
                                     onChangeText = {onChange}
                                     onBlur = {onBlur}
                                     value = {value}
@@ -112,9 +112,9 @@ export default function CreateClients({navigation}){
                     </View>
                 </View>
             </View>
-            <View style = {formsStyle.buttonLayout}>
+            <View style = {formCreateStyle.buttonLayout}>
                 <Button
-                    style = {formsStyle.button}
+                    style = {formCreateStyle.button}
                     title="submit"
                     onPress={handleSubmit(handleValues)}
                 />

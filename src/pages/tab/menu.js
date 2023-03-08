@@ -26,21 +26,23 @@ export default function Menu({navigation}){
                         {
                             permissions.accountType == "admin" ? 
                                 <MenuCard 
-                                navigation = {{navigation}}
                                 moduleName = {"CLIENTES"}
                                 modulesPermissions = {permissions.modulesPermissions.nutrition}
                                 >
-                                    <Clients/>
+                                    <Clients
+                                        navigation = {navigation}
+                                    />
                                 </MenuCard>
                                 : <></>
                         }
 
                                 <MenuCard 
-                                navigation = {{navigation}}
                                 moduleName = {"NUTRIÇÃO"}
                                 modulesPermissions = {permissions.modulesPermissions.nutrition}
                                 >
-                                    <Nutrition/>
+                                    <Nutrition
+                                        navigation = {navigation}
+                                    />
                                 </MenuCard>
 
                                 <MenuCard 

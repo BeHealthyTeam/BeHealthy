@@ -5,7 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons'
 
 //import diarioNutricionalStyle from '../../styles/stack/diarioNutricionalStyle';
-import formsStyle from "../../../styles/forms/formsStyle";
+import formCreateStyle from "../../../styles/forms/formCreateStyle";
 import api from "../../../services/api";
 import SelectRefeicoes from "../../../modals/selectRefeicoes";
 import Refeicao from "../../../components/objects/refeicao";
@@ -32,23 +32,23 @@ export default function NutritionDiary({navigation}) {
   const [addedRefeicoes, setAddedRefeicoes] = useState([]);
 
   return (
-    <SafeAreaView style={formsStyle.container}>
-      <View style={formsStyle.content}>
+    <SafeAreaView style={formCreateStyle.container}>
+      <View style={formCreateStyle.content}>
           <ScrollView>
-              <Text style={formsStyle.label}>Adicionar refeição:</Text>
+              <Text style={formCreateStyle.label}>Adicionar refeição:</Text>
               <Pressable
-                  style={formsStyle.pressableAddFoodsToRecipe}
+                  style={formCreateStyle.pressableAddFoodsToRecipe}
                   onPress={() => setSelectRefeicoes(!selectRefeicoes)}
                   title="submit"
               >
-                  <Text style={formsStyle.inputPressableField}></Text>
+                  <Text style={formCreateStyle.inputPressableField}></Text>
               </Pressable>
-            <View style={formsStyle.titleQuantidade}>
-              <Text style={formsStyle.labelQuantidade}>Quantidade </Text>
+            <View style={formCreateStyle.titleQuantidade}>
+              <Text style={formCreateStyle.labelQuantidade}>Quantidade </Text>
               <Pressable
                 onPress={ () => setAboutQuantidade(!aboutQuantidade) }
               >
-                <Ionicons name={"help-circle-outline"} style={formsStyle.iconQuantidade} size={22}/>
+                <Ionicons name={"help-circle-outline"} style={formCreateStyle.iconQuantidade} size={22}/>
               </Pressable>
               
             </View>
@@ -69,10 +69,10 @@ export default function NutritionDiary({navigation}) {
           </ScrollView>
       </View>
       <Pressable
-          style={formsStyle.pressableText}
+          style={formCreateStyle.pressableText}
           title="submit"
       >
-          <Text style={formsStyle.submitText}>Cadastrar</Text>
+          <Text style={formCreateStyle.submitText}>Cadastrar</Text>
     </Pressable>
 
     <SelectRefeicoes
