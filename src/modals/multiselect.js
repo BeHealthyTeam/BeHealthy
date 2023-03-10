@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Pressable } from 'react-native';
-import { TouchableOpacity, FlatList, Text, Modal, View, SafeAreaView} from 'react-native';
+import { TouchableOpacity, FlatList, Text, Modal, View} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Ionicons from '@expo/vector-icons/Ionicons'
 
@@ -25,16 +25,16 @@ function Item({ id, title, selectedItems, onSelect }) {
   );
 }
 
-export default function MultiSelectFoods(props) {
+export default function MultiSelect(props) {
 
+  
   const [idsSelected, setIdsSelected] = useState([]);
   const [DATA, setDATA] = useState([]);
-
   useEffect(() => {
         
     async function getAlimentos(){
         try{
-          const response = await api.get("/nutricao/alimentos")
+          const response = await api.get(props.searchBy)
           setDATA(response.data)
           
         }catch(e){
@@ -44,9 +44,9 @@ export default function MultiSelectFoods(props) {
     getAlimentos()
     }, []);
 
-    async function searchFood(word){
+    async function searchByCharactersOrWord(word){
       try {
-        const response = await api.get("/nutricao/alimentos/"+word)
+        const response = await api.get(props.searchBy+"/"+word)
         setDATA(response.data);
        
       } catch (error) {
@@ -55,10 +55,10 @@ export default function MultiSelectFoods(props) {
     }
 
   function handleOnSelectFood(food) {
-    
     setIdsSelected((actual) => {
       if(idsSelected.includes(food.id)) { // desselecionar
-        props.setIngredientes(props.ingredientes.filter(({alimento}) => alimento.id !== food.id))
+        console.log(props.selected)
+        props.setSelected(props.selected.filter(({alimento}) => alimento.id !== food.id))
         return idsSelected.filter(id => id !== food.id)
 
       }else { // selecionar
@@ -66,10 +66,9 @@ export default function MultiSelectFoods(props) {
         ingrediente.alimento = DATA.find(x => x.id === food.id);
         ingrediente.quantidade = 0;
 
-        props.ingredientes.push(ingrediente)
+        props.selected.push(ingrediente)
         return [...idsSelected, food.id]
       }
-      
     })
   }
 
@@ -93,7 +92,7 @@ export default function MultiSelectFoods(props) {
           <TextInput 
           style = {multiSelectFood.inputRow} 
           onChangeText={
-            newFoodFilter => searchFood(newFoodFilter)
+            newFoodFilter => searchByCharactersOrWord(newFoodFilter)
           }>
           </TextInput>
           <View style = {multiSelectFood.flatListContent}>

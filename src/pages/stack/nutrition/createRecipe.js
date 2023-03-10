@@ -6,10 +6,10 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import api from "../../../services/api";
 import Alimento from "../../../components/objects/alimento";
-import MultiSelectFoods from "../../../modals/multiselectFoods";
 
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import formCreateStyle from "../../../styles/forms/formCreateStyle";
+import MultiSelect from "../../../modals/multiselect";
 
 export default function CreateRecipe({ navigation }) {
 
@@ -81,11 +81,13 @@ export default function CreateRecipe({ navigation }) {
                     </View>
                 </ScrollView>
 
-                <MultiSelectFoods
+                <MultiSelect
                     multiSelectModal={multiSelectModal}
                     setMultiSelectModal={setMultiSelectModal}
-                    ingredientes={ingredientes}
-                    setIngredientes={setIngredientes}
+                    selected={ingredientes}
+                    setSelected={setIngredientes}
+                    searchBy = {"/nutricao/alimentos"}
+                    objectSelectedKey = {ingredientes.alimento}
                 />
             </View>
             <Pressable

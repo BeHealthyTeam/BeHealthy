@@ -6,6 +6,8 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 
 //import diarioNutricionalStyle from '../../styles/stack/diarioNutricionalStyle';
 import formCreateStyle from "../../../styles/forms/formCreateStyle";
+import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
+
 import api from "../../../services/api";
 import SelectRefeicoes from "../../../modals/selectRefeicoes";
 import Refeicao from "../../../components/objects/refeicao";
@@ -32,16 +34,22 @@ export default function NutritionDiary({navigation}) {
   const [addedRefeicoes, setAddedRefeicoes] = useState([]);
 
   return (
-    <SafeAreaView style={formCreateStyle.container}>
-      <View style={formCreateStyle.content}>
+    <SafeAreaView style={formsBackgroundStyle.background}>
+      <View style={formsBackgroundStyle.container}>
           <ScrollView>
-              <Text style={formCreateStyle.label}>Adicionar refeição:</Text>
               <Pressable
                   style={formCreateStyle.pressableAddFoodsToRecipe}
                   onPress={() => setSelectRefeicoes(!selectRefeicoes)}
                   title="submit"
               >
-                  <Text style={formCreateStyle.inputPressableField}></Text>
+                  <Text style={formCreateStyle.inputRow}>Tipo de refeição</Text>
+              </Pressable>
+              <Pressable
+                  style={formCreateStyle.pressableAddFoodsToRecipe}
+                  onPress={() => setSelectRefeicoes(!selectRefeicoes)}
+                  title="submit"
+              >
+                  <Text style={formCreateStyle.selectItemsLabel}>Selecione as refeições</Text>
               </Pressable>
             <View style={formCreateStyle.titleQuantidade}>
               <Text style={formCreateStyle.labelQuantidade}>Quantidade </Text>
@@ -69,10 +77,10 @@ export default function NutritionDiary({navigation}) {
           </ScrollView>
       </View>
       <Pressable
-          style={formCreateStyle.pressableText}
+          style={formsBackgroundStyle.pressableText}
           title="submit"
       >
-          <Text style={formCreateStyle.submitText}>Cadastrar</Text>
+          <Text style={formsBackgroundStyle.submitText}>Cadastrar</Text>
     </Pressable>
 
     <SelectRefeicoes
