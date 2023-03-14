@@ -117,47 +117,17 @@ const formCreateStyle = StyleSheet.create({
     iconLabel:{
         fontWeight: "bold"
     },
-    
     // END
 
 
-    //
-    /*
-    item:{
-        paddingVertical: 7,
-        paddingHorizontal: 15,
-        flex: 1,
-    },
-    itemColumnUnity:{
-        flexDirection: "column",
-    },
-
-    labelName:{
-        fontSize: 15,
-        marginBottom: 5,
-        paddingStart: 2,
-        alignSelf: "flex-start",
-    },
-    input:{
-        fontSize: 15,
-        borderRadius: 10,
+    // NUTRITION DIARY 
+    pressableTypeofSnack:{
+        backgroundColor: "white",
+        height: 45,
+        justifyContent: "center",
         borderWidth: 1,
-        padding: 7,
-        width: 70,
-        backgroundColor: 'white',
+        borderRadius: 10,
     },
-    rowContent:{
-        flexDirection: "row",
-        paddingBottom: 10,
-        paddingTop: 7,
-    },
-    columnContent:{
-        flexDirection: "column",
-        marginEnd: 15,
-        paddingBottom: 10,
-        paddingTop: 7,
-    },*/
-
 })
 
 export default formCreateStyle;

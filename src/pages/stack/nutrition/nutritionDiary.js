@@ -1,100 +1,102 @@
 import React, { useState, useEffect } from "react";
+import { View, Text, Pressable, TextInput, SafeAreaView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import { SafeAreaView, TouchableOpacity, View, Text, Pressable, TextInput} from 'react-native';
 import { ScrollView } from "react-native-gesture-handler";
-import Ionicons from '@expo/vector-icons/Ionicons'
-
-//import diarioNutricionalStyle from '../../styles/stack/diarioNutricionalStyle';
-import formCreateStyle from "../../../styles/forms/formCreateStyle";
-import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import api from "../../../services/api";
-import SelectRefeicoes from "../../../modals/selectRefeicoes";
-import Refeicao from "../../../components/objects/refeicao";
-import AboutQuantidadeModal from "../../../modals/aboutQuantidadeModal";
+import Alimento from "../../../components/objects/alimento";
 
-function Item({ id, title, selected, onSelect }) {
-  return (
-    <TouchableOpacity
-      onPress={() => onSelect(id)}
-      style={[
-        diarioNutricionalStyle.item,
-        { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' },
-      ]}
-    >
-      <Text style={diarioNutricionalStyle.title}>{title}</Text>
-    </TouchableOpacity>
-  );
-}
+import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
+import formCreateStyle from "../../../styles/forms/formCreateStyle";
+import MultiSelectFoods from "../../../modals/multiselectFoods";
 
-export default function NutritionDiary({navigation}) {
-  const { control, handleSubmit, formState: { errors } } = useForm({}); // handle inputs to send
-  const [aboutQuantidade, setAboutQuantidade] = useState(false);
-  const [selectRefeicoes, setSelectRefeicoes] = useState(false);
-  const [addedRefeicoes, setAddedRefeicoes] = useState([]);
+export default function NutritionDiary({ navigation }) {
 
-  return (
-    <SafeAreaView style={formsBackgroundStyle.background}>
-      <View style={formsBackgroundStyle.container}>
-          <ScrollView>
-              <Pressable
-                  style={formCreateStyle.pressableAddFoodsToRecipe}
-                  onPress={() => setSelectRefeicoes(!selectRefeicoes)}
-                  title="submit"
-              >
-                  <Text style={formCreateStyle.inputRow}>Tipo de refeição</Text>
-              </Pressable>
-              <Pressable
-                  style={formCreateStyle.pressableAddFoodsToRecipe}
-                  onPress={() => setSelectRefeicoes(!selectRefeicoes)}
-                  title="submit"
-              >
-                  <Text style={formCreateStyle.selectItemsLabel}>Selecione as refeições</Text>
-              </Pressable>
-            <View style={formCreateStyle.titleQuantidade}>
-              <Text style={formCreateStyle.labelQuantidade}>Quantidade </Text>
-              <Pressable
-                onPress={ () => setAboutQuantidade(!aboutQuantidade) }
-              >
-                <Ionicons name={"help-circle-outline"} style={formCreateStyle.iconQuantidade} size={22}/>
-              </Pressable>
-              
+    const { control, handleSubmit, formState: { errors } } = useForm({}); // handle inputs to send
+    const [multiSelectModal, setMultiSelectModal] = useState(false);
+    const [ingredientes, setIngredientes] = useState([]); // list ingredientes,  list quantidades
+
+    async function handleValues(data){
+        alert("Funcionalidade ainda em desenvolvimento!")
+        // api.post("/nutricao/refeicao/cadastrar",
+        // {
+        //     nome: data.name,
+        //     ingredientes: ingredientes,
+
+        // }).then(function(response){console.log(response)}).catch(function (error) {
+        //     console.error(error.message);
+        //   });
+    }
+
+    return (
+        <SafeAreaView style={formsBackgroundStyle.background}>
+            <View style={formsBackgroundStyle.container}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <Pressable
+                        style={formCreateStyle.pressableTypeofSnack}
+                        onPress={() => setMultiSelectModal(!multiSelectModal)}
+                        title="submit"
+                    >
+                        <Text style={formCreateStyle.selectItemsLabel}>Selecione os ingredientes</Text>
+                    </Pressable>
+                    <Pressable
+                        style={formCreateStyle.pressableAddFoodsToRecipe}
+                        onPress={() => setMultiSelectModal(!multiSelectModal)}
+                        title="submit"
+                    >
+                        <Text style={formCreateStyle.selectItemsLabel}>Selecione os ingredientes</Text>
+                    </Pressable>
+                    <Text style={formCreateStyle.label}>Selecionados:</Text>
+                    <View style={formCreateStyle.selectedContainer}>
+                        {
+                        ingredientes.length > 0 ?
+                            <View style={formCreateStyle.qtdHelpContainer}>
+                                <Text style={formCreateStyle.qtdLabel}>QTD.</Text>
+                                <Pressable
+                                onPress = {() => console.log("aaaaaaaaa")}
+                                style = {formCreateStyle.iconPressable}
+                                >
+                                    <Ionicons name="create-outline" size={18} style={formCreateStyle.iconLabel}/>
+                                </Pressable>
+                            </View>
+                            : <></>
+                        }
+                        {
+                        ingredientes.length > 0 ? 
+                            ingredientes.map(
+                                food => {
+                                    return <Alimento key={food.alimento.id} food={food.alimento} 
+                                    ingredientes={ingredientes} setIngredientes={setIngredientes}
+                                    />
+                                }
+                            )
+                        :<Text>Nenhum alimento selecionado</Text>
+                        }
+                    </View>
+                </ScrollView>
+
+                <MultiSelectFoods
+                    multiSelectModal={multiSelectModal}
+                    setMultiSelectModal={setMultiSelectModal}
+                    selected={ingredientes}
+                    setSelected={setIngredientes}
+                    searchBy = {"/nutricao/alimentos"}
+                />
             </View>
+            <Pressable
+                style={formsBackgroundStyle.pressableText}
+                onPress={
+                    handleSubmit(handleValues)
+                }
+                title="submit"
+            >
+                <Text style={formsBackgroundStyle.submitText}>Cadastrar</Text>
+            </Pressable>
 
-          {
-          addedRefeicoes.length > 0 ? 
-            addedRefeicoes.map(
-                  refeicao => {
-                      return <Refeicao key={refeicao.id} refeicao={refeicao} 
-                      addedRefeicoes={addedRefeicoes} setAddedRefeicoes={setAddedRefeicoes} 
-                      />
-                  }
-              )
-          
-          :<Text>Nenhum alimento selecionado</Text>
-          }
-              
-          </ScrollView>
-      </View>
-      <Pressable
-          style={formsBackgroundStyle.pressableText}
-          title="submit"
-      >
-          <Text style={formsBackgroundStyle.submitText}>Cadastrar</Text>
-    </Pressable>
 
-    <SelectRefeicoes
-      selectRefeicoes = {selectRefeicoes}
-      setSelectRefeicoes ={setSelectRefeicoes}
-      addedRefeicoes = {addedRefeicoes}
-      setAddedRefeicoes = {setAddedRefeicoes}
-    />
+        </SafeAreaView>
 
-    <AboutQuantidadeModal
-      aboutQuantidade = {aboutQuantidade}
-      setAboutQuantidade = {setAboutQuantidade}
-    />
 
-  </SafeAreaView>
-  );
+    )
 }

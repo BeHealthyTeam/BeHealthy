@@ -9,7 +9,7 @@ import Alimento from "../../../components/objects/alimento";
 
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import formCreateStyle from "../../../styles/forms/formCreateStyle";
-import MultiSelect from "../../../modals/multiselect";
+import MultiSelectFoods from "../../../modals/multiselectFoods";
 
 export default function CreateRecipe({ navigation }) {
 
@@ -81,13 +81,12 @@ export default function CreateRecipe({ navigation }) {
                     </View>
                 </ScrollView>
 
-                <MultiSelect
+                <MultiSelectFoods
                     multiSelectModal={multiSelectModal}
                     setMultiSelectModal={setMultiSelectModal}
                     selected={ingredientes}
                     setSelected={setIngredientes}
                     searchBy = {"/nutricao/alimentos"}
-                    objectSelectedKey = {ingredientes.alimento}
                 />
             </View>
             <Pressable

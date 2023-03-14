@@ -20,18 +20,17 @@ function Item({ id, title, selectedItems, onSelect }) {
       <View style={multiSelectFood.titleRow}>
         <Text style={multiSelectFood.title}>{title}</Text>
         {selectedItems.includes(id) ? <Ionicons  name="checkmark-circle-outline" style size={25}/> : <></>}
-        </View>
+      </View>
     </TouchableOpacity>
   );
 }
 
-export default function MultiSelect(props) {
+export default function MultiSelectFoods(props) {
 
   
   const [idsSelected, setIdsSelected] = useState([]);
   const [DATA, setDATA] = useState([]);
-  useEffect(() => {
-        
+  useEffect(() => {     
     async function getAlimentos(){
         try{
           const response = await api.get(props.searchBy)
@@ -57,7 +56,6 @@ export default function MultiSelect(props) {
   function handleOnSelectFood(food) {
     setIdsSelected((actual) => {
       if(idsSelected.includes(food.id)) { // desselecionar
-        console.log(props.selected)
         props.setSelected(props.selected.filter(({alimento}) => alimento.id !== food.id))
         return idsSelected.filter(id => id !== food.id)
 
@@ -103,6 +101,7 @@ export default function MultiSelect(props) {
                   id={item.id}
                   title={item.nome}
                   selectedItems={idsSelected}
+                  
                   onSelect={() => {
                     handleOnSelectFood(item)
                   }}
