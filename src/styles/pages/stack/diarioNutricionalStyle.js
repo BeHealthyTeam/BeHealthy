@@ -4,9 +4,8 @@ import { useFonts, Montserrat_900Black_Italic, Montserrat_200ExtraLight} from "e
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 64
 const statusBarWidth = StatusBar.currentWidth ? StatusBar.currentWidth : 64
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
+const mobileWindow = Dimensions.get("window");
+const Screen = Dimensions.get("screen");
 
 const diarioNutricionalStyle = StyleSheet.create({
 
@@ -22,7 +21,7 @@ const diarioNutricionalStyle = StyleSheet.create({
         paddingStart: 20,
         paddingEnd: 30,
         paddingVertical: 10,
-        marginHorizontal: windowWidth-430,
+        marginHorizontal: mobileWindow.width-430,
         marginVertical: 20,
         borderRadius: 5,
         elevation: 1,
