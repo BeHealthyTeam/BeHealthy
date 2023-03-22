@@ -94,6 +94,43 @@ const authPagesStyle = StyleSheet.create({
         paddingBottom: mobileWindow.height*0.03,
         elevation: 3,
     },
+    
+    // LOADING
+
+    background:{
+        backgroundColor: "white",
+        marginTop: statusBarHeight*2,
+        flex: 1,
+    },
+    logoBeHealthy:{
+        backgroundColor: "white",
+        marginTop: mobileWindow.height*0.05,
+        height: mobileWindow.height*0.2,
+        alignSelf: "center", 
+    },
+    logo:{
+        width: mobileWindow.width*0.9,
+        height: mobileWindow.height*0.16,
+        marginHorizontal: 10,
+    },
+    loadingGifContainer:{
+        backgroundColor: "white",
+        marginTop: mobileWindow.height*0.08,
+        height: mobileWindow.height*0.2,
+        alignSelf: "center",    
+    },
+    loadingGif:{
+        width: mobileWindow.width*0.3,
+        height: mobileWindow.height*0.4,
+        marginHorizontal: 10,
+    },
+    labelBeinghealthy:{
+        alignSelf: "center",
+        fontWeight: "bold",
+        fontSize: 20,
+        color: "#CF6766",
+        marginTop: mobileWindow.height*0.06,
+    },
 
 })
 

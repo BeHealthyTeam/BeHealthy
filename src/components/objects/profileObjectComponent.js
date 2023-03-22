@@ -1,4 +1,4 @@
-import React from "react"
+import {React, useContext} from "react"
 import { View, Text, SafeAreaView} from "react-native"
 import { Image } from "react-native-elements"
 import Ionicons from '@expo/vector-icons/Ionicons'
@@ -6,7 +6,10 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import profileComponentStyle from "../../styles/componentObjects/profileComponentStyle"
 import { Pressable } from "react-native"
 
-export default function ProfileObjectComponent({navigation}){
+export default function ProfileObjectComponent(props){
+
+    const { signOut } = useContext(props.AuthContext);
+
     return(
         <SafeAreaView style={profileComponentStyle.background}>
             <View style={profileComponentStyle.profileImageContainer}>
@@ -38,7 +41,7 @@ export default function ProfileObjectComponent({navigation}){
                 <Pressable onPress={() => alert("Clicado")}>
                     <Ionicons name="create-outline" style={profileComponentStyle.editIcon} size={30}/>
                 </Pressable>
-                <Pressable onPress={() => alert("Clicado")}>
+                <Pressable onPress = {signOut}>
                     <Ionicons name="log-out-outline" style={profileComponentStyle.logOutIcon} size={30}/>
                 </Pressable>
             </View>

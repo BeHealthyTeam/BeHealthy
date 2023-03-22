@@ -1,5 +1,5 @@
-import React from "react";
-import {View, Text, Pressable} from "react-native";
+import {React, useContext, useState, useEffect} from "react";
+import {View, Text, Pressable, LogBox} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -7,8 +7,17 @@ import AuthenticationBackgroundComponent from "../../components/utils/authentica
 import authPagesStyle from "../../styles/pages/authentication/authPagesStyle";
 
 export default function Login({navigation, route}){
-    const {isAuthenticated} = route.params
+
+    const {AuthContext} = route.params;
+    const { signIn } = useContext(AuthContext);
     
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    LogBox.ignoreLogs([
+        'Non-serializable values were found in the navigation state',
+      ]);
+      
     return(
     <AuthenticationBackgroundComponent
     >
@@ -44,11 +53,7 @@ export default function Login({navigation, route}){
         <Pressable
             style={authPagesStyle.pressableText}
             onPress={
-                () => {
-                    navigation.setParams({
-                        isAuthenticated: true
-                    })
-                }
+                () =>  signIn({ username, password })
             }
         >
             <Text style={authPagesStyle.submitText}>Confirmar</Text>

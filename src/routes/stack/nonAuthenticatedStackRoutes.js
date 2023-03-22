@@ -6,6 +6,7 @@ import Login from '../../pages/authentication/login';
 import Register from '../../pages/authentication/register';
 import FailRegister from '../../pages/authentication/failRegsiter';
 import SucessRegister from '../../pages/authentication/sucessRegister';
+import LoadignScreen from "../../pages/authentication/loadingScreen";
 
 export default function NonAuthenticatedStackRoutes(props){
   
@@ -13,14 +14,15 @@ export default function NonAuthenticatedStackRoutes(props){
 
     return(
       <NonAuthenticatedStack.Navigator>
-        <NonAuthenticatedStack.Screen name="Login" component={Login}
+        <NonAuthenticatedStack.Screen 
+          name="Login" component={Login}
           options={{
             title: "Login",
             minHeight: 10,
             headerShown: false,
           }}
-          initialParams ={{ 
-            //isAuthenticated: isAuthenticated,
+          initialParams = {{ 
+            AuthContext: props.AuthContext
           }}
         />
         

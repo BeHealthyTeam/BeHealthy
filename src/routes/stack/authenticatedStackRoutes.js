@@ -1,4 +1,4 @@
-import { react, useState } from "react";
+import { useContext, useState,  } from "react";
 import { createStackNavigator } from '@react-navigation/stack';
 
 // STACK clicked pages
@@ -8,22 +8,25 @@ import CreateRecipe from '../../pages/stack/nutrition/createRecipe';
 import CreateClients from '../../pages/stack/clients/createClients';
 import NutritionDiary from '../../pages/stack/nutrition/nutritionDiary';
 
+// Root page, as navigator nested a navigator -> TAB pages
+import AuthententicatedTabRoutes from "../tab/authenticatedTabRoutes";
+
 export default function AuthenticatedStackRoutes(props){
 
     const AuthenticatedStack = createStackNavigator();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     return(
         <AuthenticatedStack.Navigator>
-            <AuthenticatedStack.Screen name="Home" component={props.Root} 
-            options={{ headerShown: false, tabBarLabel: 'Root',
+            <AuthenticatedStack.Screen name="Home" component={AuthententicatedTabRoutes} 
+            options={{ headerShown: false, tabBarLabel: 'Root'}}
+            initialParams = {{ 
+                AuthContext: props.AuthContext 
             }}
             />
             <AuthenticatedStack.Screen name="CreateClients" component={CreateClients}
             options={{
                 title: "Cadastro de Cliente",
                 minHeight: 10,
-                
             }}
             />
             <AuthenticatedStack.Screen name="Calculate" component={Calculate} 
