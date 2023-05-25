@@ -14,9 +14,13 @@ import AuthententicatedTabRoutes from "../tab/authenticatedTabRoutes";
 export default function AuthenticatedStackRoutes(props){
 
     const AuthenticatedStack = createStackNavigator();
+    
 
     return(
         <AuthenticatedStack.Navigator>
+            {
+                
+            }
             <AuthenticatedStack.Screen name="Home" component={AuthententicatedTabRoutes} 
             options={{ headerShown: false, tabBarLabel: 'Root'}}
             initialParams = {{ 

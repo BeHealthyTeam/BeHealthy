@@ -2,15 +2,24 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createContext, useReducer, useMemo, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Amplify } from 'aws-amplify';
+import amplifyConfig from './amplify-config';
+import api from './src/services/api';
+
 
 // ROUTES PAGES -> STACK -> TAB is created inside of stack navigators
 import AuthententicatedStackRoutes from './src/routes/stack/authenticatedStackRoutes';
 import NonAuthenticatedStackRoutes from './src/routes/stack/nonAuthenticatedStackRoutes';
 import LoadignScreen from './src/pages/authentication/loadingScreen';
+import { useState } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext();
+Amplify.configure(amplifyConfig);
 
 export default function App({ navigation }) {
+
+  const [token, setToken] = useState("")
 
   // AsyncStorage store and get data.
   const storeData = async (token) => {
@@ -21,7 +30,6 @@ export default function App({ navigation }) {
       // saving error
     }
   }
-
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('@storage_Key')
@@ -29,12 +37,25 @@ export default function App({ navigation }) {
     } catch(e) {
       // error reading value
     }
-    
+  }
+
+  async function verifyFirstLogin(){ // recebe objeto de clientes
+    console.log(token)
+    try{
+        const response = await axios.get("https://d1niwswfj4.execute-api.sa-east-1.amazonaws.com/production/", {
+          headers: {'Authorization': "Bearer "+token}
+        })
+
+        console.log(response.data)
+    }catch(e){
+        console.log(e.message)
+        
+    }
+
   }
 
   const [state, dispatch] = useReducer(
     (prevState, action) => {
-
       switch (action.type) {
         case 'RESTORE_TOKEN':
           return {
@@ -88,17 +109,13 @@ export default function App({ navigation }) {
 
   const authContext = useMemo(
     () => ({
-      signIn: async (data) => {
-        // request no backend com data(login e senha) return token 
-        storeData("dummy-auth-token")
+      signIn: async (token) => {
+        storeData(token)
+        setToken(token)
         dispatch({ type: 'SIGN_IN', token: await getData() });
+        verifyFirstLogin();
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
-      signUp: async (data) => {
-        // request no backend com data(login e senha) return token 
-        storeData("dummy-auth-token") 
-        dispatch({ type: 'SIGN_IN', token: await getData() });
-      },
     }),
     []
   );
