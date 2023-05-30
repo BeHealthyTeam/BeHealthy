@@ -1,4 +1,4 @@
-import { useContext, useState,  } from "react";
+import { useState } from "react";
 import { createStackNavigator } from '@react-navigation/stack';
 
 // STACK clicked pages
@@ -14,18 +14,22 @@ import AuthententicatedTabRoutes from "../tab/authenticatedTabRoutes";
 export default function AuthenticatedStackRoutes(props){
 
     const AuthenticatedStack = createStackNavigator();
-    
+
+    async function verifyFirstLogin(){ 
+        try{
+            const response = await api.get("/users", {
+              headers: {'Authorization': token}
+            })
+            console.log(response.data)
+        }catch(e){
+            console.log(e.message)
+        }
+      }
 
     return(
         <AuthenticatedStack.Navigator>
-            {
-                
-            }
             <AuthenticatedStack.Screen name="Home" component={AuthententicatedTabRoutes} 
             options={{ headerShown: false, tabBarLabel: 'Root'}}
-            initialParams = {{ 
-                AuthContext: props.AuthContext 
-            }}
             />
             <AuthenticatedStack.Screen name="CreateClients" component={CreateClients}
             options={{

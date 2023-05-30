@@ -5,7 +5,7 @@ import { Image } from "react-native-elements";
 import AuthenticationBackgroundComponent from "../../components/utils/authenticationBackgroundComponent";
 import authPagesStyle from "../../styles/pages/authentication/authPagesStyle";
 
-export default function LoadignScreen({navigation, route}){
+export default function LoadingScreen({navigation, route}){
     return(
         <SafeAreaView style = {authPagesStyle.background}>
             <View style = {authPagesStyle.logoContainer}>

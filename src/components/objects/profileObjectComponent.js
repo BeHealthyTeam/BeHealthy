@@ -1,15 +1,22 @@
-import {React, useContext} from "react"
+import {React} from "react"
 import { View, Text, SafeAreaView} from "react-native"
 import { Image } from "react-native-elements"
 import Ionicons from '@expo/vector-icons/Ionicons'
 
 import profileComponentStyle from "../../styles/componentObjects/profileComponentStyle"
 import { Pressable } from "react-native"
+import { Auth } from "aws-amplify"
 
 export default function ProfileObjectComponent(props){
 
-    const { signOut } = useContext(props.AuthContext);
-
+    function logOut(){
+        try{
+            Auth.signOut();
+        }
+        catch(e){
+            alert(e.message)
+        }
+    }
     return(
         <SafeAreaView style={profileComponentStyle.background}>
             <View style={profileComponentStyle.profileImageContainer}>
@@ -41,7 +48,9 @@ export default function ProfileObjectComponent(props){
                 <Pressable onPress={() => alert("Clicado")}>
                     <Ionicons name="create-outline" style={profileComponentStyle.editIcon} size={30}/>
                 </Pressable>
-                <Pressable onPress = {signOut}>
+                <Pressable onPress = {
+                    logOut
+                }>
                     <Ionicons name="log-out-outline" style={profileComponentStyle.logOutIcon} size={30}/>
                 </Pressable>
             </View>

@@ -12,7 +12,6 @@ import Contacts from '../../pages/tab/contacts';
 import tabBar from '../../styles/tabBar/tabBar';
 
 export default function AuthententicatedTabRoutes({route, navigation}) {
-    const {AuthContext} = route.params
     const Tab = createMaterialTopTabNavigator();
     const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 64
     return(
@@ -47,7 +46,6 @@ export default function AuthententicatedTabRoutes({route, navigation}) {
         name="Profile" 
         component={Profile} 
         options={{ title: 'Perfil' }}
-        initialParams = {{ AuthContext: AuthContext }}
         />
   
         <Tab.Screen 

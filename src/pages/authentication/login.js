@@ -1,4 +1,3 @@
-import {React, useContext, useState, useEffect} from "react";
 import {View, Text, Pressable, LogBox} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -8,20 +7,17 @@ import { Auth } from 'aws-amplify';
 import AuthenticationBackgroundComponent from "../../components/utils/authenticationBackgroundComponent";
 import authPagesStyle from "../../styles/pages/authentication/authPagesStyle";
 
-export default function Login({navigation, route}){
+export default function Login({navigation}){
 
-    const {AuthContext} = route.params;
-    const { signIn } = useContext(AuthContext);
     const {control, handleSubmit, formState: {errors}} = useForm({})
 
     async function logIn(data) {
+        console.log(data)
         try {
-          const user = await Auth.signIn("gabi.griebeler.eu@gmail.com", "Gabi1998@");
-          //console.log(JSON.stringify(user.signInUserSession.idToken.jwtToken)) // token acesso cognito
-          signIn(JSON.stringify(user.signInUserSession.idToken.jwtToken))
-        //   console.log(JSON.stringify(user.signInUserSession.idToken.jwtToken))
+            await Auth.signIn(data.email, data.password);
+          
         } catch (error) {
-          console.log('error signing in', error);
+          alert('Whoops! '+ error.message);
         }
       }
 
@@ -92,7 +88,7 @@ export default function Login({navigation, route}){
         <Pressable
             style={authPagesStyle.pressableText}
             onPress={
-                () =>  logIn(handleSubmit(logIn))  
+                handleSubmit(logIn)
             }
         >
             <Text style={authPagesStyle.submitText}>Confirmar</Text>

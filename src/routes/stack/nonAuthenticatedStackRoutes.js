@@ -22,7 +22,6 @@ export default function NonAuthenticatedStackRoutes(props){
             headerShown: false,
           }}
           initialParams = {{ 
-            AuthContext: props.AuthContext
           }}
         />
         
@@ -33,7 +32,6 @@ export default function NonAuthenticatedStackRoutes(props){
             headerShown: false,
           }}
           initialParams = {{ 
-            AuthContext: props.AuthContext
           }}
         />
         <NonAuthenticatedStack.Screen name="FailRegister" component={FailRegister}
