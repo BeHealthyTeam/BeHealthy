@@ -28,6 +28,12 @@ export default function ConfirmSignUpPopUp(props){
             alert("Whoops! "+ e.message);
         }
     }
+    async function msToMinutes() {
+        const now = Date.now();
+        const diff = now - props.timestemp;
+        const diffMin = Math.round(diff / 60000);
+        return diffMin;
+    }
 
     return(
             <Modal
@@ -104,7 +110,7 @@ export default function ConfirmSignUpPopUp(props){
                                     resendCode(control._formValues)
                                 }
                                 else{
-                                alert("Whoops! Aguarde o tempo de espera.")
+                                    alert("Whoops! Aguarde " + msToMinutes()._z + " minuto(s) para reenviar o código novamente.")
                                 }
                             }else{
                                 alert("Whoops! Preencha o campo de e-mail.")

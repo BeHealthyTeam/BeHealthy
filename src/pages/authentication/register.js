@@ -17,7 +17,7 @@ export default function Register({navigation, route}){
 
     async function verifyTimer() {
         if(isBlocked){
-            if(timestemp + 10000 < Date.now()){ //timestep + 10 segundos to release the button
+            if(timestemp + 600000 < Date.now()){ //timestep + 10 min to release the button
                 setIsBlocked(false)
             }
         }
@@ -132,6 +132,7 @@ export default function Register({navigation, route}){
             navigation = {navigation}
             verifyTimer = {verifyTimer}
             isBlocked = {isBlocked}
+            timestemp = {timestemp}
         />
     </AuthenticationBackgroundComponent>
     )
