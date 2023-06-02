@@ -11,21 +11,30 @@ import ConfirmSignUpPopUp from "../../modals/confirmSignUpPopUp";
 export default function Register({navigation, route}){
 
     const {control, handleSubmit, formState: {errors}} = useForm({})
-    const [email, setEmail] = useState('');
-    const [confirmEmailPopup, setConfirmEmailPopup] = useState(true)
-   
+    const [confirmEmailPopup, setConfirmEmailPopup] = useState(false)
+    const [isBlocked, setIsBlocked] = useState(false)
+    const [timestemp, setTimestemp] = useState(0)
+
+    async function verifyTimer() {
+        if(isBlocked){
+            if(timestemp + 10000 < Date.now()){ //timestep + 10 segundos to release the button
+                setIsBlocked(false)
+            }
+        }
+        else{
+            setTimestemp(Date.now())
+            setIsBlocked(true)
+        }
+    }
+
     async function signUp(data) {
         try {
-          const { user } = await Auth.signUp({
+          await Auth.signUp({
             username: data.email,
             password: data.password,
-           
           });
-          console.log(user);
-          setEmail(data.email)
-          setConfirmEmailPopup(!confirmEmailPopup);
-        } catch (error) {
-          console.log('error signing up:', error);
+        } catch (e) {
+          alert('Woops! '+ e.message);
         }
       }
 
@@ -47,7 +56,19 @@ export default function Register({navigation, route}){
                 />
             )}
         />
-        
+        <Controller
+            control={control}
+            name="confirmEmail"
+            render={({ field: { onChange, onBlur, value} })=>(
+                <TextInput
+                    style= {authPagesStyle.inputText}
+                    onChangeText = {onChange}
+                    onBlur = {onBlur}
+                    value = {value}
+                    placeholder = "Confirme o e-mail"
+                />
+            )}
+        />
         <Controller
             control={control}
             name="password"
@@ -62,21 +83,55 @@ export default function Register({navigation, route}){
                 />
             )}
         />
-
-
         </View>
         <Pressable
+        onPress={() => navigation.navigate('Login')}
+        >
+            <View style = {authPagesStyle.viewRegisterLabels}>
+                <Text style = {authPagesStyle.registerLabel}>Já possui conta? </Text>
+                <Text style = {authPagesStyle.registerLabelLink}>Login</Text>
+            </View>
+        </Pressable>
+
+        
+        <Pressable
             style={authPagesStyle.pressableText}
-            onPress={handleSubmit(signUp)}
+            onPress={
+                () => 
+                {
+                    console.log(control._formValues.email)
+                    if(control._formValues.email !== "" && control._formValues.confirmEmail !== "" && control._formValues.password !== ""){
+                        if(control._formValues.email === control._formValues.confirmEmail){
+                            signUp(control._formValues)
+                        }else{
+                            alert("Whoops! E-mails não conferem.")
+                        }
+                    }
+                    else{
+                        alert("Whoops! Preencha todos os campos.")
+                    }
+                    
+                }
+            }
         >
             <Text style={authPagesStyle.submitText}>Confirmar</Text> 
+        </Pressable>
+        <Pressable
+        onPress={() => setConfirmEmailPopup(!confirmEmailPopup)}
+        >
+            <View style = {authPagesStyle.viewConfirmEmail}>
+                <Text style = {authPagesStyle.registerLabel}>Já possui registro? </Text>
+                <Text style = {authPagesStyle.registerLabelLink}>Confirme o seu e-mail!</Text>
+            </View>
         </Pressable>
 
         <ConfirmSignUpPopUp
             confirmEmailPopup = {confirmEmailPopup}
             setConfirmEmailPopup = {setConfirmEmailPopup}
-            email = {email}
+            email = {control._formValues.email}
             navigation = {navigation}
+            verifyTimer = {verifyTimer}
+            isBlocked = {isBlocked}
         />
     </AuthenticationBackgroundComponent>
     )

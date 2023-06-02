@@ -20,7 +20,7 @@ const popupStyle = StyleSheet.create({
         backgroundColor: "white",
         position: "absolute",
         borderRadius: 15,
-        elevation: 10,
+        elevation: 20,
         minHeight: "40%",
         minWidth: "85%",
         marginTop: mobileWindow.height*0.15,

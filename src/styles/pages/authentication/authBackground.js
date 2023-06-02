@@ -21,8 +21,8 @@ const authBackground = StyleSheet.create({
         alignSelf: "center",    
     },
     logo:{
-        width: mobileWindow.width*0.8,
-        height: mobileWindow.height*0.14,
+        width: mobileWindow.width*0.88,
+        height: mobileWindow.height*0.12,
         marginHorizontal: 10,
     },
 

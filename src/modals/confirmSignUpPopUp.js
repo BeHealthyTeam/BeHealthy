@@ -1,6 +1,5 @@
-import { View, Text, StatusBar, Modal, TextInput, Pressable} from "react-native"
-import {React, useState} from "react"
-import Ionicons from '@expo/vector-icons/Ionicons'
+import { View, Text, Modal, TextInput, Pressable} from "react-native"
+import {React, } from "react"
 import { Auth } from "aws-amplify";
 import { useForm, Controller } from "react-hook-form";
 
@@ -14,12 +13,21 @@ export default function ConfirmSignUpPopUp(props){
 
     async function confirmSignUp(data) {
         try {
-          await Auth.confirmSignUp(props.email, data.code);
+          await Auth.confirmSignUp(data.validateEmail, data.code);
           props.navigation.navigate('Login')
         } catch (error) {
-          console.log('error confirming sign up', error);
+          alert("Whoops! "+ error.message);
         }
       }
+    async function resendCode(data) {
+        console.log(data)
+        try{
+            await Auth.resendSignUp(data.validateEmail);
+            alert('Success!', 'Code was resent to your email');
+        }catch(e){
+            alert("Whoops! "+ e.message);
+        }
+    }
 
     return(
             <Modal
@@ -44,13 +52,15 @@ export default function ConfirmSignUpPopUp(props){
                     <View style={popupStyle.fieldsContainer}>
                     <Controller
                         control={control}
-                        name="email"
+                        name="validateEmail"
                         render={({ field: { onChange, onBlur, value} })=>(
                             <TextInput
                                 style= {authPagesStyle.inputText}
-                                value = {props.email}
+                                value = {value}
+                                onChangeText = {onChange}
+                                onBlur = {onBlur}
                                 defaultValue= {props.email}
-                                editable={false}
+                                placeholder = "E-mail"
 
                             />
                         )}
@@ -66,16 +76,46 @@ export default function ConfirmSignUpPopUp(props){
                                 onBlur = {onBlur}
                                 value = {value}
                                 placeholder = "Código"
-                                secureTextEntry={true}
                             />
                         )}
                     />
                     </View>
                     <Pressable
                         style={authPagesStyle.pressableText}
-                        onPress={handleSubmit(confirmSignUp)}
+                        onPress={
+                            () => {
+                                if(control._formValues.email !== "" && control._formValues.code !== ""){
+                                    confirmSignUp(control._formValues)
+                                }
+                                else{
+                                    alert("Whoops! Preencha todos os campos.")
+                                }
+                            }
+                        }
                     >
                         <Text style={authPagesStyle.submitText}>Confirmar</Text> 
+                    </Pressable>
+                    <Pressable
+                    onPress={
+                        () => {
+                            if(control._formValues.validateEmail !== ""){
+                                props.verifyTimer()
+                                if(!props.isBlocked){
+                                    resendCode(control._formValues)
+                                }
+                                else{
+                                alert("Whoops! Aguarde o tempo de espera.")
+                                }
+                            }else{
+                                alert("Whoops! Preencha o campo de e-mail.")
+                            }
+                        }
+                    }
+                    >
+                        <View style = {authPagesStyle.viewConfirmEmail}>
+                            <Text style = {authPagesStyle.registerLabel}>Problemas com o código? </Text>
+                            <Text style = {authPagesStyle.registerLabelLink}>Reenviar!</Text>
+                        </View>
                     </Pressable>
                     
                     </View>
