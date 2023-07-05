@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "nutriApp",
-    "slug": "nutriApp",
+    "name": "BeHealthy",
+    "slug": "behealthy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/images/BeHealthyIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -25,18 +25,19 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/images/BeHealthyIcon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.griebelergabriel.nutriApp"
+      "package": "com.griebelergabriel.behealthy"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/images/BeHealthyIcon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "8498ff01-30b0-4dec-ac22-745517b1bf66"
+        "projectId": "d147759d-fa7e-4aee-a6ee-fd1dfcb427a3"
       }
-    }
+    },
+    "owner": "griebelergabriel"
   }
 }

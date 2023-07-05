@@ -16,15 +16,15 @@ const popupStyle = StyleSheet.create({
         flex: 1,
         opacity: 0.9
     },
-    modalOrderByContainer:{
+    popUpContainer:{
         backgroundColor: "white",
         position: "absolute",
         borderRadius: 15,
         elevation: 20,
-        minHeight: "40%",
         minWidth: "85%",
-        marginTop: mobileWindow.height*0.15,
         alignSelf: "center",
+        marginVertical: "10%",
+        maxHeight: mobileWindow.height*0.8,
         paddingVertical: mobileWindow.height*0.05,
         paddingHorizontal: mobileWindow.width*0.075,
     },

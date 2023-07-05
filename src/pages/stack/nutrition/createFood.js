@@ -4,6 +4,8 @@ import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 
 import api from "../../../services/api";
+import { Auth } from 'aws-amplify';
+
 import formCreateStyle from "../../../styles/forms/formCreateStyle";
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import SelectUnityCadAlimentoModal from "../../../modals/selectUnityCadAlimentoModal";
@@ -13,8 +15,9 @@ import CreateFoodSection from "../../../components/utils/createFoodSections";
 export default function CreateFood({navigation}){
 
     const {control, handleSubmit, formState: {errors}} = useForm({});
-    const [unidadeModal, setUnidadeModal] = useState(false);
     const [unidadeValue, setUnidadeValue] = useState("");
+    // Sections state
+    const [unidadeModal, setUnidadeModal] = useState(false);
     const [showCaloria, setShowCaloria] = useState(false);
     const [showFibras, setShowFibras] = useState(false);
     const [showAcidosGraxos, setShowAcidosGraxos] = useState(false);
@@ -24,33 +27,37 @@ export default function CreateFood({navigation}){
     
 
     async function handleValues(data){
-        api.post("/nutricao/alimento/cadastrar",
+        console.log(data)
+        const session = await Auth.currentSession();
+        const idToken = session.getIdToken().getJwtToken();
+        api.post("/nutrition/food",
         {
-            nome: data.nome,
-            unidade: unidadeValue,
-            energia: data.energia,
-            fibra: data.fibra,
-            proteina: data.proteina,
-            lipideos: data.lipideos,
-            colesterol: data.colesterol,
+            name: data.name,
+            unity: unidadeValue,
+            energy: data.energy,
+            fiber: data.fiber,
+            protein: data.protein,
+            lipids: data.lipids,
+            cholesterol: data.cholesterol,
             carbo: data.carbo,
-            calcio: data.calcio,
-            magnesio: data.magnesio,
-            manganes: data.manganes,
-            fosforo: data.fosforo,
-            ferro: data.ferro,
-            sodio: data.sodio,
-            potassio: data.potassio,
-            zinco: data.zinco,
-            saturados: data.saturados,
-            mono: data.monoinsturados,
-            poli: data.polinsaturados,
+            calcium: data.calcium,
+            magnesium: data.magnesium,
+            manganese: data.manganese,
+            phosphor: data.phosphor,
+            iron: data.iron,
+            sodium: data.sodium,
+            potassium: data.potassium,
+            zinc: data.zinc,
+            saturated: data.saturated,
+            monounsaturated: data.monounsaturated,
+            polyunsaturated: data.polyunsaturated,
             b12: data.b12,
             b2: data.b2,
             b6: data.b6,
             b3: data.b3,
-            vitaminaC: data.vitaminaC
-
+            vitaminC: data.vitaminC
+        },{
+        headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
         }).then(function(response){console.log(response)}).catch(function (error) {
             console.error(error.message);
           });
@@ -65,7 +72,7 @@ export default function CreateFood({navigation}){
                             <View style={formCreateStyle.itemColumnName}>
                                 <Controller
                                     control={control}
-                                    name="nome"
+                                    name="name"
                                     render={({ field: { onChange, onBlur, value} })=>(
                                         <TextInput
                                             style = {formCreateStyle.inputRow}

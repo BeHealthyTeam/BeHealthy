@@ -19,7 +19,7 @@ export default function App() {
   async function checkUserState(){
     try{
       const user = await Auth.currentAuthenticatedUser({bypassCache: true}); //bypassCache: true -> para não pegar do cache
-      setUserState(user);
+      setUserState(user.signInUserSession.accessToken.jwtToken);
     }catch(e){
       setUserState(null);
     }

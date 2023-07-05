@@ -11,129 +11,131 @@ const modalEditAndListStyle = StyleSheet.create({
 
     // ---------------------> List and Edit modal <-----------------------
 
-    modalContainer:{
-        backgroundColor: "green",
+    profileImageContainer:{
+        alignSelf: "center",
+        marginTop: mobileWindow.height*0.01,
+        marginBottom: mobileWindow.height*0.03,
+        borderWidth: 2,
+        borderRadius: 500,
+        elevation: 3,
+    },
+    profileImage:{
+        width: (mobileWindow.height*mobileWindow.width)*0.0006,
+        height: (mobileWindow.height*mobileWindow.width)*0.0006,
+        borderWidth: 2,
+        borderRadius: 500,
+    },
+    formsContent:{
+        backgroundColor: "lightyellow",
+        borderWidth: 1,
+        borderRadius: 15,
+        borderColor: "#CF6766",
+        marginVertical: mobileWindow.height*0.05,
+        paddingVertical: mobileWindow.height*0.02,
+        paddingHorizontal: mobileWindow.width*0.015,
+        elevation: 3,
+    },
+    columnDirectionInputs:{
+        flexDirection: "column",
+    },
+    rowDirectionInputs:{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        textAlign: "center",
+        marginHorizontal: mobileWindow.width*0.015,
+    },
+    textInput:{
+        height: 45,
+        width: "95%",
+        alignSelf: "center",
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: "white",
+        marginTop: mobileWindow.height*0.03,
+        paddingStart: 7,
+        elevation: 3,
+        color: "black",
+    },
+    textInputShort:{
+        height: 45,
+        width: mobileWindow.width*0.13,
+        alignSelf: "center",
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: "white",
+        marginTop: mobileWindow.height*0.03,
+        paddingHorizontal: 5,
+        elevation: 3,
+        color: "black",
+        
+    },
+    confirmButton:{
+        alignSelf: "center",
+        marginBottom: "30%"
+    },
+    profileTitlesContent:{
+        flexDirection: "row",
+        justifyContent: "center",
+    },
+    profileTitleLabel:{
+        fontSize: 15,
+        fontWeight: "bold",
+        height: 45,
+        width: "65%",
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: "black",
+        backgroundColor: "white",
+        color: "black",
+        textAlign: "center",
+        borderStyle: 'dotted',
+        paddingTop: mobileWindow.height*0.015,
+    },
+    fieldsLabel: {
+        marginTop: mobileWindow.height*0.01,
+        marginBottom: -mobileWindow.height*0.02,
+        alignSelf: "center",
+    },
+    editProfileImagePressable:{
+        position: "absolute",
+        marginStart: mobileWindow.width*0.5,
+        marginTop: mobileWindow.height*0.04,
+        backgroundColor: "white",
+        borderWidth: 2,
+        borderRadius: 50,
+    },
+    editProfileIcon:{
+        padding: 4,
+        alignSelf: "center",
+        elevation: 10,
+    },
+    textContent:{
+        flexDirection: "column",
+    },
+    textRow:{
+        flexDirection: "row",
+        justifyContent: "flex-start",
+    },
+    textColumnData:{
+        flexDirection: "column",
         flex: 1,
     },
-    modalTitle:{
-        alignContent:"center"
+    textColumnTitle:{
+        flexDirection: "column",
     },
-
-    modalContent:{
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 25,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-
-    closeModalIcon:{
-        backgroundColor: "white",
-        alignSelf:"flex-end",
-        marginTop: 10,
-        marginEnd: 10,
-        borderRadius: 40,
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-    },
-    clientImageModal:{
-        marginBottom: 30,
-        height: 150,
-        width: 150,
-        borderWidth: 1,
-        borderRadius: 90,
-    },
-
-    textContent:{
-        borderRadius: 20,
-        padding: 15,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        backgroundColor:"#FEFECA",
-    },
-
-    modalTextPrincipalContent:{
-        alignSelf: "flex-start",
-        marginBottom: 10,
-    },
-
-    modalPrincipalGrid:{
-        flexDirection: "row",
-        alignSelf:"flex-start",
+    labelTitle:{
+        fontSize: 15,
         marginVertical: 5,
+        fontWeight: "bold",
     },
-
-    modalTextPrincipal:{
+    labelData:{
         fontSize: 15,
-        color: "#936B30",
-        paddingHorizontal: 10, 
+        marginVertical: 5,
+        flex: 1,
     },
-    modalTextContentRow:{
-        flexDirection:"row",
-        justifyContent: "space-around",
-        marginBottom: 25,
-    },
-    modalTextContent:{
-        flexDirection:"column",
-        justifyContent: "space-between",
-        margin: 40,
-        marginBottom: 10,
-    },
-
-    modalText:{
-        fontSize: 15,
-        color: "black",
-    },
-    modalTextIMC:{
-        fontSize: 15,
-        color: "black",
-    },
-    editModalInputPrincipal:{
-        width: 225,
-        textAlign:"center",
-        
-        fontSize: 15,
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "grey",
-        backgroundColor: 'white',
-        color: 'brown'
-    },
-
-    editModalInput:{
-        marginTop: 10,
-        paddingStart: 10,
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "grey",
-        backgroundColor: 'white',
-        width: 'auto',
-        color: 'red'
-    },
-    listClienteButtons:{
+    textRowSmall:{
         flexDirection: "row",
-    },
-    cardButton:{
-        paddingHorizontal: 15,
+        justifyContent: "space-between",
     },
 
 })

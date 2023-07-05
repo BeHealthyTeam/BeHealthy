@@ -1,5 +1,5 @@
 import {View, Text, Pressable, LogBox} from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useForm, Controller } from "react-hook-form";
 import { Auth } from 'aws-amplify';
@@ -12,9 +12,9 @@ export default function Login({navigation}){
     const {control, handleSubmit, formState: {errors}} = useForm({})
 
     async function logIn(data) {
-        console.log(data)
         try {
-            await Auth.signIn(data.email, data.password);
+            // await Auth.signIn(data.email, data.password);
+            await Auth.signIn("squad.behealthy@gmail.com", "Behealthy2022@");
           
         } catch (error) {
           alert('Whoops! '+ error.message);
@@ -28,6 +28,7 @@ export default function Login({navigation}){
     return(
     <AuthenticationBackgroundComponent
     >
+        <ScrollView>
         <View style= {authPagesStyle.container}>
             <Controller
                 control={control}
@@ -93,6 +94,7 @@ export default function Login({navigation}){
         >
             <Text style={authPagesStyle.submitText}>Confirmar</Text>
         </Pressable>
+        </ScrollView>
     </AuthenticationBackgroundComponent>
     )
 }

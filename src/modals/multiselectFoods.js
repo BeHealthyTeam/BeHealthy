@@ -5,6 +5,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import Ionicons from '@expo/vector-icons/Ionicons'
 
 import api from '../services/api';
+import { Auth } from 'aws-amplify';
 
 import multiSelectFood from '../styles/modals/multiSelectFoodStyle';
 
@@ -31,21 +32,30 @@ export default function MultiSelectFoods(props) {
   const [idsSelected, setIdsSelected] = useState([]);
   const [DATA, setDATA] = useState([]);
   useEffect(() => {     
-    async function getAlimentos(){
+    async function getAllFoods(){
+        const session = await Auth.currentSession();
+        const idToken = session.getIdToken().getJwtToken();
         try{
-          const response = await api.get(props.searchBy)
-          setDATA(response.data)
-          
+          const response = await api.get("/nutrition/food/",
+          {
+            headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+          })
+        setDATA(response.data)
         }catch(e){
             console.log(e.message)
         }
     }
-    getAlimentos()
+    getAllFoods()
     }, []);
 
     async function searchByCharactersOrWord(word){
       try {
-        const response = await api.get(props.searchBy+"/"+word)
+        const session = await Auth.currentSession();
+        const idToken = session.getIdToken().getJwtToken();
+        const response = await api.get("/nutrition/food/" + word, {
+          headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+        })
+        console.log(response.data)
         setDATA(response.data);
        
       } catch (error) {
@@ -99,7 +109,7 @@ export default function MultiSelectFoods(props) {
               renderItem={({ item }) => (
                 <Item
                   id={item.id}
-                  title={item.nome}
+                  title={item.name}
                   selectedItems={idsSelected}
                   
                   onSelect={() => {

@@ -5,7 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import api from "../../../services/api";
-import Alimento from "../../../components/objects/alimento";
+import Food from "./food";
 
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import formCreateStyle from "../../../styles/forms/formCreateStyle";

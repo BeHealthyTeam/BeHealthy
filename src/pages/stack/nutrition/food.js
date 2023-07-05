@@ -2,9 +2,9 @@ import { useState } from "react";
 import { View, Text} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-import alimentoObjectStyle from "../../styles/componentObjects/alimentoObjectStyle";
+import alimentoObjectStyle from "../../../styles/componentObjects/alimentoObjectStyle";
 
-export default function Alimento(props){
+export default function Food(props){
     return(
         <View style={alimentoObjectStyle.container}>
             <Text style={alimentoObjectStyle.label}>{props.food.nome}</Text>{/* food.name == nome objeto antigo*/}

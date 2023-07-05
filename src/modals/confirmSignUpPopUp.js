@@ -3,8 +3,7 @@ import {React, } from "react"
 import { Auth } from "aws-amplify";
 import { useForm, Controller } from "react-hook-form";
 
-
-import popupStyle from "../styles/modals/popupStyle"
+import popupStyle from "../styles/modals/popupStyle";
 import authPagesStyle from "../styles/pages/authentication/authPagesStyle";
 
 export default function ConfirmSignUpPopUp(props){
@@ -47,14 +46,14 @@ export default function ConfirmSignUpPopUp(props){
                 >
 
                 <Pressable 
-                style = {popupStyle.modalBackGround}
-                onPress= {
-                    () => props.setConfirmEmailPopup(!props.confirmEmailPopup)
-                }
+                    style = {popupStyle.modalBackGround}
+                    onPress= {
+                        () => props.setConfirmEmailPopup(!props.confirmEmailPopup)
+                    }
                 >
                 </Pressable>
                 
-                <View style={popupStyle.modalOrderByContainer}>
+                <View style={popupStyle.popUpContainer}>
                     <View style={popupStyle.fieldsContainer}>
                     <Controller
                         control={control}
@@ -124,7 +123,7 @@ export default function ConfirmSignUpPopUp(props){
                         </View>
                     </Pressable>
                     
-                    </View>
+                </View>
 
             </Modal>
     )

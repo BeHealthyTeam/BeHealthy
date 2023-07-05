@@ -1,9 +1,9 @@
 import { View, Text, Modal, Pressable, Image, TextInput} from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons'
 
-import modalEditAndListStyle from "../styles/modals/modalEditAndListStyle";
+import modalEditAndListStyle from "../../styles/modals/modalEditAndListStyle";
 
-export default function ListClientModal(props){
+export default function ListUsers(props){
     return(
         <Modal
             animationType="fade"

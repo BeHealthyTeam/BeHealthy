@@ -5,7 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import api from "../../../services/api";
-import Alimento from "../../../components/objects/alimento";
+import { Auth } from 'aws-amplify';
 
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import formCreateStyle from "../../../styles/forms/formCreateStyle";
@@ -18,11 +18,14 @@ export default function CreateRecipe({ navigation }) {
     const [ingredientes, setIngredientes] = useState([]); // list ingredientes,  list quantidades
 
     async function handleValues(data){
-        api.post("/nutricao/receita/cadastrar",
+        const session = await Auth.currentSession();
+        const idToken = session.getIdToken().getJwtToken();
+        api.post("/nutrition/recipe",
         {
             nome: data.name,
             ingredientes: ingredientes,
-
+        },{
+            headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
         }).then(function(response){console.log(response)}).catch(function (error) {
             console.error(error.message);
           });
@@ -86,7 +89,6 @@ export default function CreateRecipe({ navigation }) {
                     setMultiSelectModal={setMultiSelectModal}
                     selected={ingredientes}
                     setSelected={setIngredientes}
-                    searchBy = {"/nutricao/alimentos"}
                 />
             </View>
             <Pressable

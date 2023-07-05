@@ -19,43 +19,43 @@ export default function Menu({navigation}){
     }
     
     return(
-            <View style = {tabPagesBackgroundStyle.sideBackground}>
-                <View style = {tabPagesBackgroundStyle.sideMenuContainer}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
+        <View style = {tabPagesBackgroundStyle.sideBackground}>
+            <View style = {tabPagesBackgroundStyle.sideMenuContainer}>
+                <ScrollView showsVerticalScrollIndicator={false}>
 
-                        {
-                            permissions.accountType == "admin" ? 
-                                <MenuCard 
-                                moduleName = {"CLIENTES"}
-                                modulesPermissions = {permissions.modulesPermissions.nutrition}
-                                >
-                                    <Clients
-                                        navigation = {navigation}
-                                    />
-                                </MenuCard>
-                                : <></>
-                        }
+                    {
+                        permissions.accountType == "admin" ? 
+                            <MenuCard 
+                            moduleName = {"CLIENTES"}
+                            modulesPermissions = {permissions.modulesPermissions.nutrition}
+                            >
+                                <Clients
+                                    navigation = {navigation}
+                                />
+                            </MenuCard>
+                            : <></>
+                    }
 
-                                <MenuCard 
-                                moduleName = {"NUTRIÇÃO"}
-                                modulesPermissions = {permissions.modulesPermissions.nutrition}
-                                >
-                                    <Nutrition
-                                        navigation = {navigation}
-                                    />
-                                </MenuCard>
+                            <MenuCard 
+                            moduleName = {"NUTRIÇÃO"}
+                            modulesPermissions = {permissions.modulesPermissions.nutrition}
+                            >
+                                <Nutrition
+                                    navigation = {navigation}
+                                />
+                            </MenuCard>
 
-                                <MenuCard 
-                                navigation = {{navigation}}
-                                moduleName = {"EXERCÍCIOS"}
-                                modulesPermissions = {permissions.modulesPermissions.nutrition}
-                                >
-                                    <Exercices/>
-                                </MenuCard>
+                            <MenuCard 
+                            navigation = {{navigation}}
+                            moduleName = {"EXERCÍCIOS"}
+                            modulesPermissions = {permissions.modulesPermissions.nutrition}
+                            >
+                                <Exercices/>
+                            </MenuCard>
 
-                    </ScrollView>
-                </View>
+                </ScrollView>
             </View>
+        </View>
         
     )
 }

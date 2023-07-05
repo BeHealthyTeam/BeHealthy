@@ -11,12 +11,11 @@ const authBackground = StyleSheet.create({
     
     background:{
         backgroundColor: "white",
-        marginTop: statusBarHeight,
         flex: 1,
     },
     logoContainer:{
         backgroundColor: "white",
-        marginTop: mobileWindow.height*0.05,
+        marginTop: mobileWindow.height*0.11,
         height: mobileWindow.height*0.2,
         alignSelf: "center",    
     },

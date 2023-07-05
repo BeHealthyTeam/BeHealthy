@@ -11,7 +11,6 @@ const profileComponentStyle = StyleSheet.create({
 
     background:{
         flex: 1,
-
     },
     profileImageContainer:{
         alignSelf: "center",
