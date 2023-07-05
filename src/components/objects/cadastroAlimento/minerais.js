@@ -11,7 +11,7 @@ return(
             <Text style = { formSectionStyle.label}>Cálcio(mg):</Text>
             <Controller
                 control={props.control}
-                name="calcio"
+                name="calcium"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -28,7 +28,7 @@ return(
             <Text style = { formSectionStyle.label}>Magnésio (mg):</Text>
             <Controller
                 control={props.control}
-                name="magnesio"
+                name="magnesium"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -45,7 +45,7 @@ return(
             <Text style = { formSectionStyle.label}>Manganês (mg):</Text>
             <Controller
                 control={props.control}
-                name="manganes"
+                name="manganese"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -62,7 +62,7 @@ return(
             <Text style = { formSectionStyle.label}>Fósforo (mg):</Text>
             <Controller
                 control={props.control}
-                name="fosforo"
+                name="phosphor"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -79,7 +79,7 @@ return(
             <Text style = { formSectionStyle.label}>Ferro (mg):</Text>
             <Controller
                 control={props.control}
-                name="ferro"
+                name="iron"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -96,7 +96,7 @@ return(
             <Text style = { formSectionStyle.label}>Sódio (mg):</Text>
             <Controller
                 control={props.control}
-                name="sodio"
+                name="sodium"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -113,24 +113,7 @@ return(
             <Text style = { formSectionStyle.label}>Potássio (mg):</Text>
             <Controller
                 control={props.control}
-                name="potassio"
-                render={({ field: { onChange, onBlur, value} })=>(
-                    <TextInput
-                        style = {formSectionStyle.input}
-                        onChangeText = {onChange}
-                        onBlur = {onBlur}
-                        value = {value}
-                        defaultValue = '0'
-                        keyboardType="phone-pad"
-                    />
-                )}
-            />
-        </View>
-        <View style={formSectionStyle.itemRow}>
-            <Text style = { formSectionStyle.label}>Cobre (mg):</Text>
-            <Controller
-                control={props.control}
-                name="zinco"
+                name="potassium"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}

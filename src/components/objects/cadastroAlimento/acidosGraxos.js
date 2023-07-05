@@ -10,7 +10,7 @@ return(
             <Text style = {formSectionStyle.label}>Colesterol (mg):</Text>
             <Controller
                 control={props.control}
-                name="colesterol"
+                name="cholesterol"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -27,7 +27,7 @@ return(
             <Text style = {formSectionStyle.label}>Saturados (g):</Text>
             <Controller
                 control={props.control}
-                name="saturados"
+                name="saturated"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -44,7 +44,7 @@ return(
             <Text style = {formSectionStyle.label}>Monoinsaturados (g):</Text>
             <Controller
                 control={props.control}
-                name="monoinsturados"
+                name="monounsaturated"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -61,7 +61,7 @@ return(
             <Text style = {formSectionStyle.label}>Poli-insaturados (mg):</Text>
             <Controller
                 control={props.control}
-                name="polinsaturados"
+                name="polyunsaturated"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}

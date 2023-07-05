@@ -32,7 +32,6 @@ const formCreateStyle = StyleSheet.create({
         backgroundColor: 'white',
         height: 45,
         elevation: 2,
-        color: "grey"
     },
     inputPressableField:{
         borderRadius: 10,
@@ -45,8 +44,7 @@ const formCreateStyle = StyleSheet.create({
         fontSize: 15,
         color: "black",
         alignSelf: "center",
-        paddingTop: 5,
-        paddingHorizontal: 7,
+        padding: 7
     },
     nutrientsSections:{
         marginVertical: 20,

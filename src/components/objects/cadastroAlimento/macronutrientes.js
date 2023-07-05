@@ -9,7 +9,7 @@ return(
             <Text style = { formSectionStyle.label}>Proteína(g):</Text>
             <Controller
                 control={props.control}
-                name="proteina"
+                name="protein"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -26,7 +26,7 @@ return(
             <Text style = { formSectionStyle.label}>Lipídeos(g):</Text>
             <Controller
                 control={props.control}
-                name="lipideos"
+                name="lipids"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}

@@ -13,55 +13,41 @@ const modalSelectUnityCadAlimentoStyle = StyleSheet.create({
     modalBackGround:{
         backgroundColor: "grey",
         flex: 1,
-        opacity: 0.75
+        opacity: 0.9
     },
     buttonUnidade:{
         position: "absolute",
         backgroundColor: "white",
-        marginTop: 123,
-        marginStart: mobileWindow.width-118,
+        marginTop: mobileWindow.height*0.145,
+        marginStart: mobileWindow.width*0.74,
+        width: mobileWindow.width*0.17,
+        height:mobileWindow.height*0.06,
         borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        width: 59,
-        height:42,
+        elevation: 10,
     },
     modalOrderByContainer:{
         position: "absolute",
         backgroundColor: "white",
-        marginTop: 166,
-        marginStart: mobileWindow.width-183,
-        marginEnd: mobileWindow.width,
+        marginTop: mobileWindow.height*0.21,
+        marginStart: mobileWindow.width*0.61,
         borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        width: "30%",
-        height:"30%",
-        opacity: 0.75,
+        minWidth: mobileWindow.width*0.3,
+        minHeight: mobileWindow.height*0.3,
     },
     modalContent:{
-        flexDirection: "row",
-        justifyContent: "center",
-
+        flexDirection: "column",
+        paddingHorizontal: mobileWindow.width*0.07,
+        paddingVertical: mobileWindow.height*0.01,
     },
     pressOptionModal:{
-        backgroundColor: "lightgreen",
-        marginVertical: 5,
+        backgroundColor: "#4E8E4D",
+        marginVertical: 3,
         borderRadius: 10,
     },
     label:{
-        paddingHorizontal: 10,
-        paddingVertical: 5,
+        paddingHorizontal: 15,
+        paddingVertical: 7,
+        textAlign: "center",
     },
 })
 

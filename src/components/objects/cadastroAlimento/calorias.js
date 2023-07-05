@@ -10,7 +10,7 @@ return(
             <Text style = {formSectionStyle.label}>Energia (Kcal):</Text>
             <Controller
                 control={props.control}
-                name="energia"
+                name="energy"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}

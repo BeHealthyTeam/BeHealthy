@@ -25,43 +25,50 @@ export default function CreateFood({navigation}){
     const [showMinerais, setShowMinerais] = useState(false);
     const [showVitaminas, setShowVitaminas] = useState(false);
     
-
     async function handleValues(data){
-        console.log(data)
-        const session = await Auth.currentSession();
-        const idToken = session.getIdToken().getJwtToken();
-        api.post("/nutrition/food",
-        {
-            name: data.name,
-            unity: unidadeValue,
-            energy: data.energy,
-            fiber: data.fiber,
-            protein: data.protein,
-            lipids: data.lipids,
-            cholesterol: data.cholesterol,
-            carbo: data.carbo,
-            calcium: data.calcium,
-            magnesium: data.magnesium,
-            manganese: data.manganese,
-            phosphor: data.phosphor,
-            iron: data.iron,
-            sodium: data.sodium,
-            potassium: data.potassium,
-            zinc: data.zinc,
-            saturated: data.saturated,
-            monounsaturated: data.monounsaturated,
-            polyunsaturated: data.polyunsaturated,
-            b12: data.b12,
-            b2: data.b2,
-            b6: data.b6,
-            b3: data.b3,
-            vitaminC: data.vitaminC
-        },{
-        headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
-        }).then(function(response){console.log(response)}).catch(function (error) {
-            console.error(error.message);
-          });
-          navigation.navigate('Feed')
+        if(data.name !== undefined && data.name !== ""){
+            if(data.name[0] !== " "){
+                if(unidadeValue !== ""){
+                    const session = await Auth.currentSession();
+                    const idToken = session.getIdToken().getJwtToken();
+                    api.post("/nutrition/food",
+                    {
+                        name: data.name,
+                        unity: unidadeValue,
+                        energy: data.energy,
+                        fiber: data.fiber,
+                        protein: data.protein,
+                        lipids: data.lipids,
+                        cholesterol: data.cholesterol,
+                        carbo: data.carbo,
+                        calcium: data.calcium,
+                        magnesium: data.magnesium,
+                        manganese: data.manganese,
+                        phosphor: data.phosphor,
+                        iron: data.iron,
+                        sodium: data.sodium,
+                        potassium: data.potassium,
+                        zinc: data.zinc,
+                        saturated: data.saturated,
+                        monounsaturated: data.monounsaturated,
+                        polyunsaturated: data.polyunsaturated,
+                        b12: data.b12,
+                        b2: data.b2,
+                        b6: data.b6,
+                        b3: data.b3,
+                        vitaminC: data.vitaminC
+                    },{
+                    headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+                    }).catch(function (error) {
+                        console.error(error.message);
+                    });
+                    navigation.navigate('Menu')
+                }else{
+                    alert("Selecione a unidade do Alimento!")} 
+            }else{
+                alert("O nome não pode começar com espaço em branco!")}
+        }else{
+            alert("Digite o nome do Alimento!")}
     }
     return(
         <View style={formsBackgroundStyle.background}>

@@ -10,7 +10,7 @@ return(
             <Text style = {formSectionStyle.label}>Fibra Alimentar (mg):</Text>
             <Controller
                 control={props.control}
-                name="fibra"
+                name="fiber"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
