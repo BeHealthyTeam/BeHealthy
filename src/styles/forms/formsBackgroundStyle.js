@@ -17,8 +17,7 @@ const formsBackgroundStyle = StyleSheet.create({
     },
     container:{
         backgroundColor: 'white',
-        paddingStart: 15,
-        paddingEnd: 15,
+        paddingHorizontal: 15,
         paddingVertical: 20,
         marginVertical: 20,
         borderRadius: 15,

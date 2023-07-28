@@ -1,7 +1,7 @@
 import { View, Text, StatusBar, Modal, TextInput, Pressable} from "react-native"
 import {React, useState} from "react"
 
-import modalSelectUnityCadAlimentoStyle from "../styles/modals/modalSelectUnityCadAlimentoStyle"
+import modalSelectUnityCadAlimentoStyle from "../../../../styles/modals/modalSelectUnityCadAlimentoStyle"
 
 export default function SelectUnityCadAlimentoModal(props){
 
@@ -14,7 +14,7 @@ export default function SelectUnityCadAlimentoModal(props){
                 onRequestClose={() => {
                     props.setUnidadeModal(!props.unidadeModal);
                 }}
-                >
+            >
 
                 <Pressable 
                 style = {modalSelectUnityCadAlimentoStyle.modalBackGround}

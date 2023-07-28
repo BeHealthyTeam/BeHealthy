@@ -12,6 +12,7 @@ const alimentoObjectStyle = StyleSheet.create({
     container:{
         flex: 1,
         flexDirection: "row",
+        elevation: 10,
     },
     item:{
         paddingVertical: 5,
@@ -21,7 +22,6 @@ const alimentoObjectStyle = StyleSheet.create({
     },
 
     label:{
-        textAlign: "auto",
         fontSize: 15,
         marginBottom: 5,
         paddingHorizontal: 10,
@@ -38,6 +38,9 @@ const alimentoObjectStyle = StyleSheet.create({
         height: mobileWindow.height*0.04,
         backgroundColor: 'white',
         elevation: 3,
+    },
+    unityContent:{
+        width: mobileWindow.width*0.11,
     },
 })
 

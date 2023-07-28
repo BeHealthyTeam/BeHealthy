@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-import alimentoObjectStyle from "../../../styles/componentObjects/alimentoObjectStyle";
+import alimentoObjectStyle from "../../../../styles/componentObjects/alimentoObjectStyle";
 
 export default function Meal(props){
     return(

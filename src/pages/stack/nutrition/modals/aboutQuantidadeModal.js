@@ -1,6 +1,6 @@
 import { View, Text, Modal, Pressable} from "react-native"
 
-import modalAboutQuantidade from "../styles/modals/modalAboutQuantidade";
+import modalAboutQuantidade from "../../../../styles/modals/modalAboutQuantidade";
 
 export default function AboutQuantidadeModal(props){
 

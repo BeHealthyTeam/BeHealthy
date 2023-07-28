@@ -8,7 +8,7 @@ import { Auth } from 'aws-amplify';
 
 import formCreateStyle from "../../../styles/forms/formCreateStyle";
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
-import SelectUnityCadAlimentoModal from "../../../modals/selectUnityCadAlimentoModal";
+import SelectUnityCadAlimentoModal from "../nutrition/modals/selectUnityCadAlimentoModal";
 import CreateFoodSection from "../../../components/utils/createFoodSections";
 
 

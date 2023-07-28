@@ -11,22 +11,22 @@ export default function Nutrition(props){
             <Pressable style = {modulesStyle.iconPressable}
                 onPress={() =>  props.navigation.navigate('CreateFood')}
             >
-                <Ionicons name="nutrition-outline" style={modulesStyle.icon} size={50}/>
+                <Ionicons name="nutrition-outline" style={modulesStyle.icon}/>
             </Pressable>
             <Pressable style = {modulesStyle.iconPressable}
                 onPress={() => props.navigation.navigate('CreateRecipe')}
             >
-                <Ionicons name="receipt-outline" style={modulesStyle.icon} size={45}/>
+                <Ionicons name="receipt-outline" style={modulesStyle.icon} />
             </Pressable>
             <Pressable style = {modulesStyle.iconPressable}
-                onPress={()=> props.navigation.navigate('NutritionDiary')}
+                onPress={()=> props.navigation.navigate('ControlCalendar')}
             >
-                <Ionicons name="checkmark-done-outline" style={modulesStyle.icon} size={50}/>
+                <Ionicons name="checkmark-done-outline" style={modulesStyle.icon} />
             </Pressable>
             <Pressable style = {modulesStyle.iconPressable}
                 onPress={()=> alert("Em desenvolvimento, criar dieta")}
             >
-                <Ionicons name="create-outline" style={modulesStyle.icon} size={52}/>
+                <Ionicons name="create-outline" style={modulesStyle.icon} />
             </Pressable>
         </View>
     )

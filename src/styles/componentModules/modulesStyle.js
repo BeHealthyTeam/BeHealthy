@@ -22,7 +22,7 @@ const modulesStyle = StyleSheet.create({
         justifyContent: "flex-start",
         flexDirection: "row",
         flexWrap: "wrap",
-        paddingHorizontal: 10,
+        paddingHorizontal: mobileWindow.width*0.05,
         elevation: 10,
     },
     iconPressable:{
@@ -30,6 +30,11 @@ const modulesStyle = StyleSheet.create({
         marginBottom: 10,
         justifyContent: "center",
         alignSelf: "center",
+    },
+    icon:{
+        width: 40,
+        height: 40,
+        fontSize: 40,
     },
 
 })

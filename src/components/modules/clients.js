@@ -9,12 +9,12 @@ export default function Clients(props){
             <Pressable style = {modulesStyle.iconPressable}
                 onPress={()=> console.log("Cliquei")}
             >
-                <Ionicons name="people-outline" style={modulesStyle.icon} size={50}/>
+                <Ionicons name="people-outline" style={modulesStyle.icon}/>
             </Pressable>
             <Pressable style = {modulesStyle.iconPressable}
                 onPress={()=> console.log("Cliquei")}
             >
-                <Ionicons name="podium-outline" style={modulesStyle.icon} size={45}/>
+                <Ionicons name="podium-outline" style={modulesStyle.icon}/>
             </Pressable>
         </View>
     )

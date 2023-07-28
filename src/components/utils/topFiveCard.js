@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 
 import api from "../../services/api";
-import topFiveCardStyle from "../../styles/componenetUtils/topFiveCardStyle";
+import topFiveCardStyle from "../../styles/componentUtils/topFiveCardStyle"
 
 
 export default function TopFiveCard(props){

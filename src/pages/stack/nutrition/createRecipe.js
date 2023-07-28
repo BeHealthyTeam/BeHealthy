@@ -9,21 +9,22 @@ import { Auth } from 'aws-amplify';
 
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import formCreateStyle from "../../../styles/forms/formCreateStyle";
-import MultiSelectFoods from "../../../modals/multiselectFoods";
+import MultiSelectFoods from "../nutrition/modals/multiselectFoods"
+import Food from "./components/food";
 
 export default function CreateRecipe({ navigation }) {
 
     const { control, handleSubmit, formState: { errors } } = useForm({}); // handle inputs to send
     const [multiSelectModal, setMultiSelectModal] = useState(false);
-    const [ingredientes, setIngredientes] = useState([]); // list ingredientes,  list quantidades
+    const [ingredients, setIngredients] = useState([]); // list ingredientes,  list quantidades
 
     async function handleValues(data){
         const session = await Auth.currentSession();
         const idToken = session.getIdToken().getJwtToken();
         api.post("/nutrition/recipe",
         {
-            nome: data.name,
-            ingredientes: ingredientes,
+            name: data.name,
+            ingredients: ingredients,
         },{
             headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
         }).then(function(response){console.log(response)}).catch(function (error) {
@@ -58,7 +59,7 @@ export default function CreateRecipe({ navigation }) {
                     <Text style={formCreateStyle.label}>Selecionados:</Text>
                     <View style={formCreateStyle.selectedContainer}>
                         {
-                        ingredientes.length > 0 ?
+                        ingredients.length > 0 ?
                             <View style={formCreateStyle.qtdHelpContainer}>
                                 <Text style={formCreateStyle.qtdLabel}>QTD.</Text>
                                 <Pressable
@@ -71,11 +72,12 @@ export default function CreateRecipe({ navigation }) {
                             : <></>
                         }
                         {
-                        ingredientes.length > 0 ? 
-                            ingredientes.map(
-                                food => {
-                                    return <Alimento key={food.alimento.id} food={food.alimento} 
-                                    ingredientes={ingredientes} setIngredientes={setIngredientes}
+                        ingredients.length > 0 ? 
+                            ingredients.map(
+                                ingredient => {
+                                    console.log(ingredient)
+                                    return <Food key={ingredient.food.id} food={ingredient.food} 
+                                    ingredients={ingredients} setIngredients={setIngredients}
                                     />
                                 }
                             )
@@ -87,8 +89,8 @@ export default function CreateRecipe({ navigation }) {
                 <MultiSelectFoods
                     multiSelectModal={multiSelectModal}
                     setMultiSelectModal={setMultiSelectModal}
-                    selected={ingredientes}
-                    setSelected={setIngredientes}
+                    selected={ingredients}
+                    setSelected={setIngredients}
                 />
             </View>
             <Pressable

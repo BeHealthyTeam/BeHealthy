@@ -1,8 +1,8 @@
 import { View, Text, Pressable} from "react-native"
 
-import menuCardStyle from "../../styles/componenetUtils/menuCardStyle";
+import menuCardStyle from "../../styles/componentUtils/menuCardStyle"
 
-export default function MenuCard(props){ // FALTA!!!!! passar navigation
+export default function MenuCard(props){
     
     return(
 

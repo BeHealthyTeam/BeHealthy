@@ -9,17 +9,17 @@ export default function Exercices(props){
             <Pressable style = {modulesStyle.iconPressable}
                 onPress={()=> console.log("Cliquei")}
             >
-                <Ionicons name="barbell-outline" style={modulesStyle.icon} size={45}/>
+                <Ionicons name="barbell-outline" style={modulesStyle.icon}/>
             </Pressable>
             <Pressable style = {modulesStyle.iconPressable}
                 onPress={()=> console.log("Cliquei")}
             >
-                <Ionicons name="create-outline" style={modulesStyle.icon} size={50}/>
+                <Ionicons name="create-outline" style={modulesStyle.icon}/>
             </Pressable>
             <Pressable style = {modulesStyle.iconPressable}
                 onPress={()=> console.log("Cliquei")}
             >
-                <Ionicons name="checkmark-done-outline" style={modulesStyle.icon} size={45}/>
+                <Ionicons name="checkmark-done-outline" style={modulesStyle.icon}/>
             </Pressable>
         </View>
     )
