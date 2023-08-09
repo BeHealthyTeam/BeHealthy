@@ -34,6 +34,7 @@ const multiSelectFood = StyleSheet.create({
         backgroundColor: "white",
         alignItems: "center",
         alignSelf: "center",
+        minWidth: "81%",
         flex: 1,
         paddingHorizontal: mobileWindow.width*0.05,
 

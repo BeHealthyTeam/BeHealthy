@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 // STACK clicked pages
 import CreateFood from '../../pages/stack/nutrition/createFood'
 import CreateRecipe from '../../pages/stack/nutrition/createRecipe';
-import Diary from '../../pages/stack/user/diary';
+import Day from '../../pages/stack/user/day';
 import ControlCalendar from '../../pages/stack/user/calendar';
 
 // Root page, as navigator nested a navigator -> TAB pages
@@ -35,11 +35,11 @@ export default function AuthenticatedStackRoutes(props){
                 title: "Cadastro de Receita",
             }}
             />
-            <AuthenticatedStack.Screen name="Diary" component={Diary} 
+            <AuthenticatedStack.Screen name="Day" component={Day} 
             options={{ headerStyle: {
                 minHeight: 10,
                 },
-                title: "Diario Nutricional",
+                title: "Diário",
             }}
             />
             <AuthenticatedStack.Screen name="ControlCalendar" component={ControlCalendar} 

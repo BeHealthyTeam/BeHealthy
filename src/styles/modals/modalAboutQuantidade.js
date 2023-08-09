@@ -17,20 +17,12 @@ const modalAboutQuantidade = StyleSheet.create({
     container:{
         position: "absolute",
         backgroundColor: "white",
-        marginTop: 207,
-        marginStart: mobileWindow.width-250,
-        width: 200,
+        marginTop: mobileWindow.height*0.35,
+        marginHorizontal: mobileWindow.width*0.1,
+        width: mobileWindow.width*0.8,
         borderRadius: 15,
         padding: 10,
-        flexWrap: "nowrap",
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
+        elevation: 20,
     },
 
 })

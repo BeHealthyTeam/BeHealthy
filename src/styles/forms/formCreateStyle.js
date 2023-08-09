@@ -1,5 +1,6 @@
 import { StyleSheet, StatusBar, Dimensions} from "react-native";
 import { useFonts, Montserrat_900Black_Italic, Montserrat_200ExtraLight} from "expo-font";
+import { color } from "react-native-elements/dist/helpers";
 
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 64
 const statusBarWidth = StatusBar.currentWidth ? StatusBar.currentWidth : 64
@@ -70,7 +71,8 @@ const formCreateStyle = StyleSheet.create({
     pressableAddFoodsToRecipe:{
         backgroundColor: "white",
         height: 45,
-        marginVertical: 15,
+        marginBottom: mobileWindow.height*0.03,
+        marginTop: mobileWindow.height*0.023,
         justifyContent: "center",
         borderWidth: 1,
         borderRadius: 10,
@@ -117,6 +119,32 @@ const formCreateStyle = StyleSheet.create({
     },
     // END
 
+    // DIARY CREATE 
+
+    turnIconsContainer:{
+        flexDirection: "row",
+        justifyContent: "space-around",
+        marginBottom: mobileWindow.height*0.055,
+    },
+
+    turnIconLabel:{
+        fontSize: 30,
+        borderWidth: 1,
+        borderRadius: 25,
+        paddingVertical: 5,
+        paddingHorizontal: 7,
+        textAlign: "center",
+    },
+    turnIconLabelSelected:{
+        fontSize: 30,
+        borderWidth: 1,
+        borderRadius: 25,
+        paddingVertical: 5,
+        paddingHorizontal: 7,
+        textAlign: "center",
+        backgroundColor: "#4E8E4D",
+        color: "white"
+    },
 
     // NUTRITION DIARY 
     pressableTypeofSnack:{
@@ -126,6 +154,9 @@ const formCreateStyle = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
     },
+
+
+
 })
 
 export default formCreateStyle;

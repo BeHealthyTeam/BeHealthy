@@ -28,6 +28,18 @@ const popupStyle = StyleSheet.create({
         paddingVertical: mobileWindow.height*0.05,
         paddingHorizontal: mobileWindow.width*0.075,
     },
+    multiSelectPopUpContainer:{
+        backgroundColor: "white",
+        position: "absolute",
+        borderRadius: 15,
+        elevation: 20,
+        minWidth: "97%",
+        alignSelf: "center",
+        marginVertical: "10%",
+        maxHeight: mobileWindow.height*0.8,
+        paddingVertical: mobileWindow.height*0.05,
+        paddingHorizontal: mobileWindow.width*0.075,
+    },
     fieldsContainer:{
         marginBottom: mobileWindow.height*0.05,
     },

@@ -65,15 +65,9 @@ export default function ControlCalendar({ navigation }) {
             current={getCurrentDate()}
             // Callback that gets called when the user selects a day
             onDayPress={day => {
-              console.log('selected day', day);
-              
-              let markedDatasss = {
-                [day.dateString] : {dots: [nut, exer, psy], selected: true, selectedColor: 'white'}
-              }
-              setControlMarkedDates(
-                {...controlMarkedDates, ...markedDatasss}
-              )
-              console.log(controlMarkedDates)
+              navigation.navigate('Day', {
+                fullDate : day,
+              })
             }}
             // Mark specific dates as marked
             markedDates = {controlMarkedDates}

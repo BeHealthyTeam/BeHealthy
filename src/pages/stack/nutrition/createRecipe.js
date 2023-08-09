@@ -10,6 +10,7 @@ import { Auth } from 'aws-amplify';
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import formCreateStyle from "../../../styles/forms/formCreateStyle";
 import MultiSelectFoods from "../nutrition/modals/multiselectFoods"
+import AboutQuantidadeModal from "./modals/aboutQuantidadeModal";
 import Food from "./components/food";
 
 export default function CreateRecipe({ navigation }) {
@@ -17,19 +18,26 @@ export default function CreateRecipe({ navigation }) {
     const { control, handleSubmit, formState: { errors } } = useForm({}); // handle inputs to send
     const [multiSelectModal, setMultiSelectModal] = useState(false);
     const [ingredients, setIngredients] = useState([]); // list ingredientes,  list quantidades
+    const [aboutQuantidadeModal, setAboutQuantidadeModal] = useState(false)
 
     async function handleValues(data){
-        const session = await Auth.currentSession();
-        const idToken = session.getIdToken().getJwtToken();
-        api.post("/nutrition/recipe",
-        {
-            name: data.name,
-            ingredients: ingredients,
-        },{
-            headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
-        }).then(function(response){console.log(response)}).catch(function (error) {
-            console.error(error.message);
-          });
+        if(control._fields.name._f.value){  
+            const session = await Auth.currentSession();
+            const idToken = session.getIdToken().getJwtToken();
+            api.post("/nutrition/recipe",
+            {
+                name: data.name,
+                ingredients: ingredients,
+            },{
+                headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+            }).then(function(response){
+                alert("Receita cadastrada com sucesso!")
+            }).catch(function (error) {
+                console.error(error.message);
+            });
+        }else{
+            alert("Preencha o nome da Receita e seus ingredientes")
+        }
     }
 
     return (
@@ -63,10 +71,10 @@ export default function CreateRecipe({ navigation }) {
                             <View style={formCreateStyle.qtdHelpContainer}>
                                 <Text style={formCreateStyle.qtdLabel}>QTD.</Text>
                                 <Pressable
-                                onPress = {() => console.log("aaaaaaaaa")}
+                                onPress = {() => setAboutQuantidadeModal(!aboutQuantidadeModal)}
                                 style = {formCreateStyle.iconPressable}
                                 >
-                                    <Ionicons name="create-outline" size={18} style={formCreateStyle.iconLabel}/>
+                                    <Ionicons name="help-outline" size={18} style={formCreateStyle.iconLabel}/>
                                 </Pressable>
                             </View>
                             : <></>
@@ -85,7 +93,10 @@ export default function CreateRecipe({ navigation }) {
                         }
                     </View>
                 </ScrollView>
-
+                <AboutQuantidadeModal
+                    aboutQuantidadeModal = {aboutQuantidadeModal}
+                    setAboutQuantidadeModal = {setAboutQuantidadeModal}
+                />
                 <MultiSelectFoods
                     multiSelectModal={multiSelectModal}
                     setMultiSelectModal={setMultiSelectModal}

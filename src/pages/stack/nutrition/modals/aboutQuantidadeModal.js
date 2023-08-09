@@ -8,17 +8,17 @@ export default function AboutQuantidadeModal(props){
             <Modal
                 animationType="fade"
                 transparent = {true}
-                visible = {props.aboutQuantidade}
+                visible = {props.aboutQuantidadeModal}
                 style = {modalAboutQuantidade.background}
                 onRequestClose={() => {
-                    props.setAboutQuantidade(!props.aboutQuantidade);
+                    props.setAboutQuantidadeModal(!props.aboutQuantidadeModal);
                 }}
                 >
 
                 <Pressable 
                 style = {modalAboutQuantidade.background}
                 onPress= {
-                    () => props.setAboutQuantidade(!props.aboutQuantidade)
+                    () => props.setAboutQuantidadeModal(!props.aboutQuantidadeModal)
                 }
                 >
                     <View style={modalAboutQuantidade.container}>
