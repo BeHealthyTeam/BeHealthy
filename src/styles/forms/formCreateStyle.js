@@ -154,6 +154,20 @@ const formCreateStyle = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
     },
+    submitButton:{
+        backgroundColor: "#4E8E4D",
+        alignSelf: "center",
+        marginTop: mobileWindow.height*0.02,
+        marginBottom: -mobileWindow.height*0.02,
+        paddingHorizontal: mobileWindow.width*0.05,
+        paddingVertical: mobileWindow.height*0.015,
+        borderRadius: 15,
+        elevation: 10,
+    },
+    submitButtonLabel:{
+        fontWeight: "bold",
+        color: "white",
+    },
 
 
 

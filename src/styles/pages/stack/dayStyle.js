@@ -48,7 +48,6 @@ const dayStyle = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: "#4E8E4D",
-        elevation: 3,
         paddingHorizontal: 10,
         paddingVertical: 5,
     },

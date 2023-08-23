@@ -28,53 +28,65 @@ function Item({ id, title, selectedItems, onSelect }) {
 
 export default function MultiselectMeals(props) {
 
-  
   const [idsSelected, setIdsSelected] = useState([]);
-  const [foodData, setFoodData] = useState([]);
-  useEffect(() => {     
-    async function getAllFoods(){
-        const session = await Auth.currentSession();
-        const idToken = session.getIdToken().getJwtToken();
-        try{
-          const response = await api.get("/nutrition/food/",
-          {
-            headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
-          })
-          setFoodData(response.data)
-        }catch(e){
-            console.log(e.message)
-        }
-    }
-    getAllFoods()
-    }, []);
+  const [mealData, setMealData] = useState([]);
+   
+  useEffect(() => {    
+    getAllMeals()
+  }, []);
+
+  async function getAllMeals(){
+    const session = await Auth.currentSession();
+    try{
+      const foodResponse = await api.get("/nutrition/food",
+      {
+        headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+      })
+
+      const recipeResponse = await api.get("/nutrition/recipe",
+      {
+        headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+      })
+      setMealData([...foodResponse.data, ...recipeResponse.data])
+
+    }catch(e){
+        console.log(e.message)
+      }
+  }
 
     async function searchByCharactersOrWord(word){
       try {
         const session = await Auth.currentSession();
-        const idToken = session.getIdToken().getJwtToken();
-        const response = await api.get("/nutrition/food/" + word, {
+
+        const foodResponse = await api.get("/nutrition/food/" + word, {
           headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
         })
-        setFoodData(response.data);
-       
-      } catch (error) {
-        console.log(error.message)
-      }
+        const recipeResponse = await api.get("/nutrition/recipe/" + word,
+        {
+          headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+        })
+
+        setMealData([...foodResponse.data, ...recipeResponse.data])
+        
+        } catch (error) {
+          console.log(error.message)
+        }
     }
 
-  function handleOnSelectFood(food) {
+  function handleOnSelectFood(item) {
     setIdsSelected((actual) => {
-      if(idsSelected.includes(food.id)) { // desselecionar
-        props.setSelected(props.selected.filter(({alimento}) => alimento.id !== food.id))
-        return idsSelected.filter(id => id !== food.id)
+      if(idsSelected.includes(item.id)) { // desselecionar
+        console.log(props.selected)
+        props.setSelected(props.selected.filter(({food}) => food.id !== item.id))
+        return idsSelected.filter(id => id !== item.id)
 
       }else { // selecionar
         let ingredient = new Object();
-        ingredient.food = foodData.find(x => x.id === food.id);
+        ingredient.food =  mealData.find(x => x.id === item.id);
         ingredient.quantity = 0;
 
         props.selected.push(ingredient)
-        return [...idsSelected, food.id]
+        return [...idsSelected, item.id]
       }
     })
   }
@@ -104,7 +116,7 @@ export default function MultiselectMeals(props) {
           </TextInput>
           <View style = {multiSelectFood.flatListContent}>
             <FlatList
-              data={foodData}
+              data={mealData}
               renderItem={({ item }) => (
                 <Item
                   id={item.id}

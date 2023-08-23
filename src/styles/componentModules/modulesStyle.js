@@ -16,14 +16,13 @@ const modulesStyle = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#CF6766",
         borderRadius: 15,
-        elevation: 5,
     },
     iconContent:{
         justifyContent: "flex-start",
         flexDirection: "row",
         flexWrap: "wrap",
-        paddingHorizontal: mobileWindow.width*0.05,
-        elevation: 10,
+        paddingStart: mobileWindow.width*0.03,
+        paddingVertical: mobileWindow.height*0.005,
     },
     iconPressable:{
         marginHorizontal: 25,

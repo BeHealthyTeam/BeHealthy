@@ -45,6 +45,7 @@ export default function MultiSelectFoods(props) {
             console.log(e.message)
         }
     }
+    console.log(foodData)
     getAllFoods()
     }, []);
 
@@ -64,8 +65,9 @@ export default function MultiSelectFoods(props) {
 
   function handleOnSelectFood(food) {
     setIdsSelected((actual) => {
+      console.log(props.selected)
       if(idsSelected.includes(food.id)) { // desselecionar
-        props.setSelected(props.selected.filter(({alimento}) => alimento.id !== food.id))
+        props.setSelected(props.selected.filter(({food}) => food.id !== food.id))
         return idsSelected.filter(id => id !== food.id)
 
       }else { // selecionar

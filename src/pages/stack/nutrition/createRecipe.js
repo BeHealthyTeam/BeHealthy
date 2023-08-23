@@ -74,7 +74,7 @@ export default function CreateRecipe({ navigation }) {
                                 onPress = {() => setAboutQuantidadeModal(!aboutQuantidadeModal)}
                                 style = {formCreateStyle.iconPressable}
                                 >
-                                    <Ionicons name="help-outline" size={18} style={formCreateStyle.iconLabel}/>
+                                    <Ionicons name="help-outline" style={formCreateStyle.iconLabel}/>
                                 </Pressable>
                             </View>
                             : <></>
@@ -83,7 +83,6 @@ export default function CreateRecipe({ navigation }) {
                         ingredients.length > 0 ? 
                             ingredients.map(
                                 ingredient => {
-                                    console.log(ingredient)
                                     return <Food key={ingredient.food.id} food={ingredient.food} 
                                     ingredients={ingredients} setIngredients={setIngredients}
                                     />

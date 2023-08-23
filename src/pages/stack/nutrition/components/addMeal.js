@@ -6,11 +6,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import api from "../../../../services/api"
 import Food from "../../nutrition/components/food";
-import MultiSelectFoods from "../modals/multiselectFoods"
 
 import popupStyle from "../../../../styles/modals/popupStyle";
 import formCreateStyle from "../../../../styles/forms/formCreateStyle"
 import AboutQuantidadeModal from "../modals/aboutQuantidadeModal";
+import MultiselectMeals from "../modals/multiselectMeals";
 
 export default function AddMeal(props) {
 
@@ -134,7 +134,7 @@ export default function AddMeal(props) {
                     </View>
                 </ScrollView>
 
-                <MultiSelectFoods
+                <MultiselectMeals
                     multiSelectModal={multiSelectModal}
                     setMultiSelectModal={setMultiSelectModal}
                     selected={ingredientes}
@@ -144,17 +144,16 @@ export default function AddMeal(props) {
                     aboutQuantidadeModal = {aboutQuantidadeModal}
                     setAboutQuantidadeModal = {setAboutQuantidadeModal}
                 />
-            </View>
-            
-            <Pressable
-                style={formCreateStyle.pressableText}
+                <Pressable
+                style={formCreateStyle.submitButton}
                 onPress={
                     handleSubmit(handleValues)
                 }
                 title="submit"
-            >
-                <Text style={formCreateStyle.submitText}>Cadastrar</Text>
-            </Pressable>
+                >
+                    <Text style={formCreateStyle.submitButtonLabel}>Cadastrar</Text>
+                </Pressable>
+            </View>
         </Modal>
     )
 }
