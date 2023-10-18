@@ -71,10 +71,9 @@ export default function MultiSelectFoods(props) {
         return idsSelected.filter(id => id !== food.id)
 
       }else { // selecionar
-        let ingredient = new Object();
-        ingredient.food = foodData.find(x => x.id === food.id);
+        let ingredient = foodData.find(x => x.id === food.id);
         ingredient.quantity = 0;
-
+ 
         props.selected.push(ingredient)
         return [...idsSelected, food.id]
       }

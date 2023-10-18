@@ -7,25 +7,24 @@ import alimentoObjectStyle from "../../../../styles/componentObjects/alimentoObj
 export default function Meal(props){
     return(
         <View style={alimentoObjectStyle.item}>
-            <Text style={alimentoObjectStyle.label}>{props.refeicao.alimento.nome}</Text>{/* food.alimento.nome == nome objeto antigo*/}
+            <Text style={alimentoObjectStyle.label}>{props.meal.name}</Text>{/* food.alimento.nome == nome objeto antigo*/}
             <TextInput style={alimentoObjectStyle.qtdInput} placeholder="qtd."
             onEndEditing={
                 (textValue) => {
-                    if(props.ingredientes.find(x => x.id === props.refeicao.id)){ 
-                        const posicaoObjetoNoArray = (props.ingredientes.indexOf(
-                            props.ingredientes.find(x => x.id === props.refeicao.id)))
+                    if(props.meals.find(x => x.id === props.meals.id)){ 
+                        const posicaoObjetoNoArray = (props.meals.indexOf(
+                            props.meals.find(x => x.id === props.meal.id)))
 
-                        const antigoIngrediente = props.ingredientes.find(x => x.id === props.food.id);
-
+                        const oldMeal = props.meals.find(x => x.meal.id === props.meal.id);
+                        
                         if(textValue.nativeEvent.text != ""){
-                            let ingrediente = new Object();
-                            ingrediente.alimento = antigoIngrediente;
-                            ingrediente.quantidade = textValue.nativeEvent.text;
-                            
-                            props.ingredientes[posicaoObjetoNoArray] = ingrediente;
+                            console.log("oldMeal")
+                            console.log(oldMeal)
+                            let Meal = oldMeal;
+                            Meal.meal.mealQuantity = textValue.nativeEvent.text;
+                            props.meals[posicaoObjetoNoArray] = Meal;
                         }
                     }
-                    console.log(props.ingredientes);
                 }
             }
             >

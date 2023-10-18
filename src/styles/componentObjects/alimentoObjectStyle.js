@@ -18,7 +18,7 @@ const alimentoObjectStyle = StyleSheet.create({
         paddingVertical: mobileWindow.height*0.005,
         flex: 1,
         flexDirection: "row",
-        justifyContent: "flex-end"
+        justifyContent: "space-between",
     },
 
     label:{

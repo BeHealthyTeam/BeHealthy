@@ -130,7 +130,7 @@ return(
             <Text style = { formSectionStyle.label}>Zinco (mg):</Text>
             <Controller
                 control={props.control}
-                name="zinco"
+                name="zinc"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}

@@ -69,7 +69,7 @@ export default function ControlCalendar({ navigation }) {
                 fullDate : day,
               })
             }}
-            // Mark specific dates as marked
+            // Mark specific dates as marked (Pattern) -> '2023-10-04': {dots: [nut, exer, psy], selected: true, selectedColor: 'transparent'},
             markedDates = {controlMarkedDates}
           />
         </View>

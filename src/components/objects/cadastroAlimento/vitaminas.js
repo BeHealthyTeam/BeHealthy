@@ -77,7 +77,7 @@ return(
             <Text style = { formSectionStyle.label}>Ácido Ascórbico(C) (mg):</Text>
             <Controller
                 control={props.control}
-                name="vitaminaC"
+                name="vitaminC"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}

@@ -79,11 +79,9 @@ export default function Day({ navigation, route}) {
     return (
         <ScrollView style={formsBackgroundStyle.background}>
             <View style={dayStyle.dataStringContent}>
-                <Text style={dayStyle.dateLabel}>{fullDate.day}</Text>
-                <Text style={dayStyle.dateLabel}>de</Text>
-                <Text style={dayStyle.dateLabel}>{verifyMonth(fullDate.month)}</Text>
-                <Text style={dayStyle.dateLabel}>de</Text>
-                <Text style={dayStyle.dateLabel}>{fullDate.year}</Text> 
+                <Text style={dayStyle.dateLabel}>
+                    {fullDate.day} de {verifyMonth(fullDate.month)} de {fullDate.year}
+                </Text>
             </View>
             <View style={dayStyle.moduleContent}>
                 <Text style={dayStyle.titleLabel}>NUTRICIONAL</Text>
@@ -178,6 +176,7 @@ export default function Day({ navigation, route}) {
                 <AddMeal
                 addMealModal = {addMealModal}
                 setAddMealModal = {setAddMealModal}
+                fullDate = {fullDate}
                 />
                 
             </View>

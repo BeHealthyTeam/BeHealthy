@@ -12,11 +12,11 @@ export default function Food(props){
                 <TextInput style={alimentoObjectStyle.qtdInput}
                 onEndEditing={
                     (textValue) => {
-                        if(props.ingredients.find(x => x.food.id === props.food.id)){
+                        if(props.ingredients.find(x => x.id === props.food.id)){
                             const posicaoObjetoNoArray = (props.ingredients.indexOf(
-                                props.ingredients.find(x => x.food.id === props.food.id)))
+                                props.ingredients.find(x => x.id === props.food.id)))
                                 
-                            const oldIngredient = props.ingredients.find(x => x.food.id === props.food.id);
+                            const oldIngredient = props.ingredients.find(x => x.id === props.food.id);
 
                             if(textValue.nativeEvent.text != ""){
                                 let ingredient = oldIngredient;

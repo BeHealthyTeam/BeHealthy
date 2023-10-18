@@ -36,7 +36,7 @@ export default function CreateRecipe({ navigation }) {
                 console.error(error.message);
             });
         }else{
-            alert("Preencha o nome da Receita e seus ingredientes")
+            alert("Preencha o nome da Receita e verifique os ingredientes!")
         }
     }
 
@@ -83,7 +83,7 @@ export default function CreateRecipe({ navigation }) {
                         ingredients.length > 0 ? 
                             ingredients.map(
                                 ingredient => {
-                                    return <Food key={ingredient.food.id} food={ingredient.food} 
+                                    return <Food key={ingredient.id} food={ingredient} 
                                     ingredients={ingredients} setIngredients={setIngredients}
                                     />
                                 }

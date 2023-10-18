@@ -76,14 +76,13 @@ export default function MultiselectMeals(props) {
   function handleOnSelectFood(item) {
     setIdsSelected((actual) => {
       if(idsSelected.includes(item.id)) { // desselecionar
-        console.log(props.selected)
-        props.setSelected(props.selected.filter(({food}) => food.id !== item.id))
+        props.setSelected(props.selected.filter(({meal}) => meal.id !== item.id))
         return idsSelected.filter(id => id !== item.id)
 
       }else { // selecionar
         let ingredient = new Object();
-        ingredient.food =  mealData.find(x => x.id === item.id);
-        ingredient.quantity = 0;
+        ingredient.meal =  mealData.find(x => x.id === item.id);
+        ingredient.meal.mealQuantity = 0;
 
         props.selected.push(ingredient)
         return [...idsSelected, item.id]
