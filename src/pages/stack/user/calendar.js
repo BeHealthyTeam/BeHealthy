@@ -46,6 +46,9 @@ export default function ControlCalendar({ navigation }) {
   
   useEffect(() => {
     setCurrentMonthAndYear(getCurrentDate().slice(0,7))
+    }, []);
+
+  useEffect(() => {
     getAllDiariesFromMonthAndYear();
     }, [currentMonthAndYear]);
 
@@ -59,7 +62,6 @@ export default function ControlCalendar({ navigation }) {
       })
       const data = response.data;
       const markedDatesList = {}
-      
       data.forEach(element => {
         markedDatesList[element.date] = {dots: [nut], selected: true, selectedColor: 'transparent'}
       })
@@ -67,7 +69,6 @@ export default function ControlCalendar({ navigation }) {
     }catch(e){
       console.log(e.message)
     }
-    console.log(controlMarkedDates)
   }
 
   const getCurrentDate=()=>{
@@ -82,6 +83,38 @@ export default function ControlCalendar({ navigation }) {
     var year = new Date().getFullYear();
     return year + '-' + month + '-' + date;
   }
+  async function setPrevMonth(){
+
+    var currentMonth = parseInt(currentMonthAndYear.slice(-2));
+    currentMonth = currentMonth-1;
+    if(currentMonth < 10){
+      if(currentMonth == 0){
+        var currentYear = parseInt(currentMonthAndYear.slice(0,4))
+        currentYear = currentYear-1;
+        setCurrentMonthAndYear(currentYear+"-12");
+      }
+      else setCurrentMonthAndYear(currentMonthAndYear.slice(0, -2) +"0"+currentMonth)
+    }
+    else{
+      setCurrentMonthAndYear(currentMonthAndYear.slice(0, -2) + currentMonth)
+    }
+  }
+  async function setNextMonth(){
+
+    var currentMonth = parseInt(currentMonthAndYear.slice(-2));
+    currentMonth = currentMonth+1;
+    if(currentMonth < 10){
+      if(currentMonth == 13){
+        var currentYear = parseInt(currentMonthAndYear.slice(0,4))
+        currentYear = currentYear+1;
+        setCurrentMonthAndYear(currentYear+"01");
+      }
+      else setCurrentMonthAndYear(currentMonthAndYear.slice(0, -2) +"0"+currentMonth)
+    }
+    else{
+      setCurrentMonthAndYear(currentMonthAndYear.slice(0, -2) + currentMonth)
+    }
+  }
   
   return (
     <View style={formsBackgroundStyle.background}>
@@ -92,9 +125,15 @@ export default function ControlCalendar({ navigation }) {
             style={calendarStyle.content}
             headerStyle={calendarStyle.header}
             theme={calendarStyle.theme}
-            // Specify the current date
+            onPressArrowLeft={subtractMonth => {
+              subtractMonth()
+              setPrevMonth()
+            }}
+            onPressArrowRight={addMonth => {
+              addMonth()
+              setNextMonth()
+            }}
             current={getCurrentDate()}
-            // Callback that gets called when the user selects a day
             onDayPress={day => {
               navigation.navigate('Day', {
                 fullDate : day,
