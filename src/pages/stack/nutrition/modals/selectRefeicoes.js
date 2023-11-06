@@ -33,11 +33,16 @@ export default function SelectRefeicoes(props) {
         
     async function getAlimentos(){
         try{
-          const responseAlimentos = await api.get("/nutricao/alimentos")
-          const responseReceitas = await api.get("/nutricao/receitas")
+          const responseAlimentos = await api.get("/nutricao/alimentos",
+          {
+            headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
+          })
+          const responseReceitas = await api.get("/nutricao/receitas",
+          {
+            headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
+          })
           let response = [...responseAlimentos.data, ...responseReceitas.data]
           setDATA(response)
-          console.log(DATA)
           
           
         }catch(e){
@@ -49,7 +54,9 @@ export default function SelectRefeicoes(props) {
 
     async function searchFood(word){
       try {
-        const response = await api.get("/nutricao/alimentos/"+word)
+        const response = await api.get("/nutricao/alimentos/"+word, {
+          headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
+        })
         setDATA(response.data);
        
       } catch (error) {

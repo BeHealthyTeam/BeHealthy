@@ -28,9 +28,9 @@ function Item({ id, title, selectedItems, onSelect }) {
 
 export default function MultiSelectFoods(props) {
 
-  
   const [idsSelected, setIdsSelected] = useState([]);
   const [foodData, setFoodData] = useState([]);
+  
   useEffect(() => {     
     async function getAllFoods(){
         const session = await Auth.currentSession();
@@ -38,14 +38,13 @@ export default function MultiSelectFoods(props) {
         try{
           const response = await api.get("/nutrition/food/",
           {
-            headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+            headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
           })
           setFoodData(response.data)
         }catch(e){
             console.log(e.message)
         }
     }
-    console.log(foodData)
     getAllFoods()
     }, []);
 
@@ -65,7 +64,6 @@ export default function MultiSelectFoods(props) {
 
   function handleOnSelectFood(food) {
     setIdsSelected((actual) => {
-      console.log(props.selected)
       if(idsSelected.includes(food.id)) { // desselecionar
         props.setSelected(props.selected.filter(({food}) => food.id !== food.id))
         return idsSelected.filter(id => id !== food.id)

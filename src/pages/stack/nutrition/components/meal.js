@@ -18,8 +18,6 @@ export default function Meal(props){
                         const oldMeal = props.meals.find(x => x.meal.id === props.meal.id);
                         
                         if(textValue.nativeEvent.text != ""){
-                            console.log("oldMeal")
-                            console.log(oldMeal)
                             let Meal = oldMeal;
                             Meal.meal.mealQuantity = textValue.nativeEvent.text;
                             props.meals[posicaoObjetoNoArray] = Meal;

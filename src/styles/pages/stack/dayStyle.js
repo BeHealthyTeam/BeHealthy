@@ -19,6 +19,8 @@ const dayStyle = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 20,
         elevation: 20,
+        textAlign: "center",
+        width: mobileWindow.width*0.7,
     },
     titleLabel:{
         fontWeight: "bold",

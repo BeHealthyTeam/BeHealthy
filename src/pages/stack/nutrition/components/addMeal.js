@@ -12,7 +12,6 @@ import popupStyle from "../../../../styles/modals/popupStyle";
 import formCreateStyle from "../../../../styles/forms/formCreateStyle"
 import AboutQuantidadeModal from "../modals/aboutQuantidadeModal";
 import MultiselectMeals from "../modals/multiselectMeals";
-import { element } from "prop-types";
 
 
 export default function AddMeal(props) {
@@ -31,8 +30,6 @@ export default function AddMeal(props) {
     async function separateValues(){
         setSelectedFoods([])
         setSelectedRecipes([])
-        console.log("meals")
-        console.log(meals)
         try{
             meals.map(element => {
                 if('ingredients' in element.meal){
@@ -64,21 +61,23 @@ export default function AddMeal(props) {
     async function handleValues(foods, recipes){
         const session = await Auth.currentSession();
         const idToken = session.getIdToken().getJwtToken();
-        console.log("recipes")
-        console.log(recipes)
-        
+
         if(morningSelected){
             api.post("/nutrition/meal", {
+                userId: Auth.user.attributes.email,
                 date: props.fullDate.dateString,
                 dayTurn: "morning",
                 foodsMeal: foods,
                 recipesMeal: recipes,
             },{
-                headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+                headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
             }).catch(function (error) {
                 console.error(error.message);
             });
             alert("Sucess!")
+            props.getAllDiariesFromMonthAndYear()
+            props.getAllFromDateMeals()
+            props.setAddMealModal(false)
         }
     }
 

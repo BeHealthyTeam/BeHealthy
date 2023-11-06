@@ -40,12 +40,12 @@ export default function MultiselectMeals(props) {
     try{
       const foodResponse = await api.get("/nutrition/food",
       {
-        headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+        headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
       })
 
       const recipeResponse = await api.get("/nutrition/recipe",
       {
-        headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+        headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
       })
       setMealData([...foodResponse.data, ...recipeResponse.data])
 
@@ -59,11 +59,11 @@ export default function MultiselectMeals(props) {
         const session = await Auth.currentSession();
 
         const foodResponse = await api.get("/nutrition/food/" + word, {
-          headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+          headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
         })
         const recipeResponse = await api.get("/nutrition/recipe/" + word,
         {
-          headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+          headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
         })
 
         setMealData([...foodResponse.data, ...recipeResponse.data])

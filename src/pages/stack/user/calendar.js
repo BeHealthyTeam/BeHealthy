@@ -3,9 +3,9 @@ import { View, Text, Pressable, TextInput } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Calendar, LocaleConfig } from "react-native-calendars";
+import { Auth } from "aws-amplify";
 
 import api from "../../../services/api";
-import Food from "../nutrition/components/food";
 
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import calendarStyle from "../../../styles/componentUtils/calendarStyle";
@@ -34,7 +34,41 @@ LocaleConfig.locales['br'] = {
 
 
 export default function ControlCalendar({ navigation }) {
+
+  const nut = {key: 'nutrition', color: 'black', selectedDotColor: '#587653'};
+  const exer = {key: 'exercices', color: 'black', selectedDotColor: '#30415D'};
+  const psy = {key: 'psychological', color: 'black', selectedDotColor: '#CF6766'};
+
   const[controlMarkedDates, setControlMarkedDates] = useState({})
+  const[currentMonthAndYear, setCurrentMonthAndYear] = useState()
+  const[activityData, setActivityData] = useState();
+
+  
+  useEffect(() => {
+    setCurrentMonthAndYear(getCurrentDate().slice(0,7))
+    getAllDiariesFromMonthAndYear();
+    }, [currentMonthAndYear]);
+
+  async function getAllDiariesFromMonthAndYear(){
+    const session = await Auth.currentSession();
+    const idToken = session.getIdToken().getJwtToken();
+    try{
+      const response = await api.get("/nutrition/meal/calendar/"+currentMonthAndYear,
+      {
+        headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
+      })
+      const data = response.data;
+      const markedDatesList = {}
+      
+      data.forEach(element => {
+        markedDatesList[element.date] = {dots: [nut], selected: true, selectedColor: 'transparent'}
+      })
+      setControlMarkedDates(markedDatesList)
+    }catch(e){
+      console.log(e.message)
+    }
+    console.log(controlMarkedDates)
+  }
 
   const getCurrentDate=()=>{
     var date = new Date().getDate();
@@ -46,12 +80,9 @@ export default function ControlCalendar({ navigation }) {
       month = "0"+month
     }
     var year = new Date().getFullYear();
-    return year + '-' + month + '-' + date; //format: y-m-d;
+    return year + '-' + month + '-' + date;
   }
-
-  const nut = {key: 'nutrition', color: 'black', selectedDotColor: '#587653'};
-  const exer = {key: 'exercices', color: 'black', selectedDotColor: '#30415D'};
-  const psy = {key: 'psychological', color: 'black', selectedDotColor: '#CF6766'};
+  
   return (
     <View style={formsBackgroundStyle.background}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -67,6 +98,7 @@ export default function ControlCalendar({ navigation }) {
             onDayPress={day => {
               navigation.navigate('Day', {
                 fullDate : day,
+                getAllDiariesFromMonthAndYear : getAllDiariesFromMonthAndYear
               })
             }}
             // Mark specific dates as marked (Pattern) -> '2023-10-04': {dots: [nut, exer, psy], selected: true, selectedColor: 'transparent'},

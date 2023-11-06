@@ -32,6 +32,7 @@ export default function CreateRecipe({ navigation }) {
                 headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
             }).then(function(response){
                 alert("Receita cadastrada com sucesso!")
+                navigation.navigate('Menu')
             }).catch(function (error) {
                 console.error(error.message);
             });

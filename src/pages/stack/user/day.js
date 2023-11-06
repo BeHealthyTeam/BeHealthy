@@ -4,13 +4,17 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import dayStyle from "../../../styles/pages/stack/dayStyle";
 import { ScrollView } from "react-native-gesture-handler";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Auth } from "aws-amplify";
+import api from "../../../services/api";
 import AddMeal from "../nutrition/components/addMeal";
 
 export default function Day({ navigation, route}) {
-
-    const { fullDate } = route.params; // Access the passed parameter
+    const { fullDate, getAllDiariesFromMonthAndYear } = route.params; // Access the passed parameter
     const [addMealModal, setAddMealModal] = useState(false)
+    const [mealDiaryData, setMealDiaryData] = useState([])
+    const exerciceData = []
+    const psychologicalData = []
 
     function verifyMonth(monthNumber){
         switch (monthNumber) {
@@ -54,27 +58,26 @@ export default function Day({ navigation, route}) {
                 break;
         }
     }
+    async function getAllFromDateMeals(){
+        var YearAndMonth = fullDate.year + "-"+ fullDate.month;
+        const session = await Auth.currentSession();
+        const idToken = session.getIdToken().getJwtToken();
+        console.log(idToken)
+        try{
+            const response = await api.get("/nutrition/meal/"+ fullDate.dateString,
+            {
+                headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
+            })
+            setMealDiaryData(response.data)
+        }catch(e){
+            console.log(e.message)
+        }
+    }
+    
 
-    const mealData = [
-        {"mealId": 0, "dayTurn": "manhã", 
-        "foods": [
-            {"id": "64c29207a8fdd4750c373ca9","name": "BANANA", "unity": "mg", "quantity": 400},
-            {"id": "64c29207a8fdd4750c373ca10","name": "Leite", "unity": "ml", "quantity": 500},
-        ],},
-        {"mealId": 1, "dayTurn": "tarde", 
-        "foods": [
-            {"id": "64c29207a8fdd4750c373ca11","name": "Strogonoff", "unity": "g", "quantity": 200},
-            {"id": "64c29207a8fdd4750c373ca12","name": "Arroz", "unity": "g", "quantity": 500},
-        ],},
-        {"mealId": 2, "dayTurn": "noite", 
-        "foods": [
-            {"id": "64c29207a8fdd4750c373c13","name": "Chá", "unity": "l", "quantity": 1},
-            {"id": "64c29207a8fdd4750c373c14","name": "Bolacha", "unity": "g", "quantity": 300},
-        ],},
-        
-    ]
-    const exerciceData = []
-    const psychologicalData = []
+    useEffect(()=>{
+        getAllFromDateMeals()
+    }, [])
 
     return (
         <ScrollView style={formsBackgroundStyle.background}>
@@ -87,9 +90,9 @@ export default function Day({ navigation, route}) {
                 <Text style={dayStyle.titleLabel}>NUTRICIONAL</Text>
                 <View style={formsBackgroundStyle.container}>
                     {
-                        mealData.length > 0 ?
-                            mealData.map((meal) => (
-                                <View key={meal.mealId} style={dayStyle.modulesContentData}>
+                        mealDiaryData.length > 0 ?
+                            mealDiaryData.map((meal) => (
+                                <View key={meal.id} style={dayStyle.modulesContentData}>
                                     <View style={dayStyle.turnContainer}>
                                         <Pressable
                                             onPress={() => alert("Cliquei para Editar! " + fullDate.day + " de "+ verifyMonth(fullDate.month) +" "+ meal.dayTurn)}
@@ -100,12 +103,18 @@ export default function Day({ navigation, route}) {
                                         <Text>Refeições:</Text>
                                         <View style={dayStyle.foodContainer}>
                                             {
-                                            meal.foods.map((food) => (
-                                                <Text key={food.id} style={dayStyle.foodText}>
-                                                    {food.name}: {food.quantity}{food.unity}
+                                            meal.foodsMeal.map((consumedFood, index)=>(
+                                                <Text key={index} style={dayStyle.foodText}>
+                                                    {consumedFood.name}: {consumedFood.mealQuantity}
                                                 </Text>
-                                            ))
-                                            }
+                                            ))}
+                                            {
+                                            meal.recipesMeal.map((consumedRecipe, index)=>(
+                                                <Text key={index} style={dayStyle.foodText}>
+                                                    {consumedRecipe.name}: {consumedRecipe.mealQuantity} de {consumedRecipe.ingredients[0].quantity}
+                                                    {consumedRecipe.ingredients[0].unity}
+                                                </Text>
+                                            ))}
                                         </View>
                                         <Pressable
                                             onPress={() => alert("Cliquei para Remover! " + fullDate.day + " de "+ verifyMonth(fullDate.month) +" "+ meal.dayTurn)}
@@ -116,7 +125,7 @@ export default function Day({ navigation, route}) {
                                 </View>
                             ))
                         :
-                        <Text>Não há registros de refeição para este dia!</Text>
+                        <Text>Não há registros de refeições para este dia!</Text>
                     }
                     <Pressable
                     onPress={() => setAddMealModal(!addMealModal)}
@@ -177,6 +186,9 @@ export default function Day({ navigation, route}) {
                 addMealModal = {addMealModal}
                 setAddMealModal = {setAddMealModal}
                 fullDate = {fullDate}
+                navigation = {navigation}
+                getAllFromDateMeals = {getAllFromDateMeals}
+                getAllDiariesFromMonthAndYear = {getAllDiariesFromMonthAndYear}
                 />
                 
             </View>
