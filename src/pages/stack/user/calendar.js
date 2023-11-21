@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, TextInput } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, Swipeable } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Calendar, LocaleConfig } from "react-native-calendars";
 import { Auth } from "aws-amplify";
@@ -107,19 +107,18 @@ export default function ControlCalendar({ navigation }) {
     }
   }
   async function setNextMonth(){
-
     var currentMonth = parseInt(currentMonthAndYear.slice(-2));
     currentMonth = currentMonth+1;
-    if(currentMonth < 10){
+    if(currentMonth >= 10){
       if(currentMonth == 13){
         var currentYear = parseInt(currentMonthAndYear.slice(0,4))
         currentYear = currentYear+1;
-        setCurrentMonthAndYear(currentYear+"01");
+        setCurrentMonthAndYear(currentYear+"-"+"01");
       }
-      else setCurrentMonthAndYear(currentMonthAndYear.slice(0, -2) +"0"+currentMonth)
+      else setCurrentMonthAndYear(currentMonthAndYear.slice(0, -2) +currentMonth)
     }
     else{
-      setCurrentMonthAndYear(currentMonthAndYear.slice(0, -2) + currentMonth)
+      setCurrentMonthAndYear(currentMonthAndYear.slice(0, -2) +"0"+currentMonth)
     }
   }
   return (
@@ -174,6 +173,7 @@ export default function ControlCalendar({ navigation }) {
         currentMonthAndYear = {currentMonthAndYear}
         mealMonthData = {mealMonthData}
         />
+        
       </ScrollView>
     </View>
   )

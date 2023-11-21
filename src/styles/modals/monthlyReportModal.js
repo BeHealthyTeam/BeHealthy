@@ -79,15 +79,23 @@ const monthlyReportModalStyle = StyleSheet.create({
         width: mobileWindow.width*0.95,
     },
     dateInfoAndHelp:{
-        alignSelf: "center",
-        flexDirection: "row"
+        flexDirection: "row",
+        justifyContent: "space-evenly"
     },
     moreInfosIcon:{
         fontSize: 25,
         fontWeight: "bold",
         paddingStart: mobileWindow.width*0.02,
         color: "#CF6766",
-    }
+    },
+    monthChangerIcon:{
+        fontSize: 25,
+        fontWeight: "bold",
+    },
+    dateWithHelp:{
+        flexDirection: "row",
+        marginHorizontal: -mobileWindow.width*0.15,
+    },
 
 
 })

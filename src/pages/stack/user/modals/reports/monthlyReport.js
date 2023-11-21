@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, TextInput } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import { Auth } from "aws-amplify";
 import api from "../../../../../services/api";
@@ -14,15 +13,26 @@ import { Modal } from "react-native";
 export default function MonthlyReport(props) {
 
   const [currentTimeType, setCurrentTimeType] = useState("Mensal");
+  const [currentYearMonth, setCurrentYearMonth] = useState()
   const [monthlyNutritionalData, setMonthlyNutritionalData] = useState({});
   const [nutritionalData, setNutritionalData] = useState({});
 
     
   useEffect(()=>{
+    setCurrentYearMonth(props.currentMonthAndYear)
     if(props.monthlyReportModal){
       getMonthlyNutritionReport()
     }
   },[props.monthlyReportModal])
+
+  useEffect(()=>{
+    if(props.monthlyReportModal){
+      getMonthlyNutritionReport()
+      setCurrentTimeType('Mensal')
+    }
+    
+  },[currentYearMonth])
+      
 
   async function handleLeftArrow(){
     switch (currentTimeType) {
@@ -72,12 +82,11 @@ export default function MonthlyReport(props) {
         break;
     }
   }
-
   async function getMonthlyNutritionReport(){
     const session = await Auth.currentSession();
     const idToken = session.getIdToken().getJwtToken();
     try{
-      const response = await api.get("/nutrition/report/consumedNutrientsByMonth/"+props.currentMonthAndYear,
+      const response = await api.get("/nutrition/report/consumedNutrientsByMonth/"+currentYearMonth,
       {
         headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
       })
@@ -115,7 +124,7 @@ export default function MonthlyReport(props) {
     const session = await Auth.currentSession();
     const idToken = session.getIdToken().getJwtToken();
       try{
-        const response = await api.get("/nutrition/report/consumedNutrientsByWeek/"+props.currentMonthAndYear+ "/"+weekNumber,
+        const response = await api.get("/nutrition/report/consumedNutrientsByWeek/"+currentYearMonth+ "/"+weekNumber,
         {
           headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
         })
@@ -148,8 +157,36 @@ export default function MonthlyReport(props) {
         console.log(e.message)
       }
   }
-  
-
+  async function setPrevMonth(){
+    var currentMonth = parseInt(currentYearMonth.slice(-2));
+    currentMonth = currentMonth-1;
+    if(currentMonth < 10){
+      if(currentMonth == 0){
+        var currentYear = parseInt(currentYearMonth.slice(0,4))
+        currentYear = currentYear-1;
+        setCurrentYearMonth(currentYear+"-12");
+      }
+      else setCurrentYearMonth(currentYearMonth.slice(0, -2) +"0"+currentMonth)
+    }
+    else{
+      setCurrentYearMonth(currentYearMonth.slice(0, -2) + currentMonth)
+    }
+  }
+  async function setNextMonth(){
+    var currentMonth = parseInt(currentYearMonth.slice(-2));
+    currentMonth = currentMonth+1;
+    if(currentMonth >= 10){
+      if(currentMonth == 13){
+        var currentYear = parseInt(currentYearMonth.slice(0,4))
+        currentYear = currentYear+1;
+        setCurrentYearMonth(currentYear+"-"+"01");
+      }
+      else setCurrentYearMonth(currentYearMonth.slice(0, -2)+currentMonth)
+    }
+    else{
+      setCurrentYearMonth(currentYearMonth.slice(0, -2) + "0"+currentMonth)
+    }
+  }
   
   return (
     <Modal
@@ -171,11 +208,23 @@ export default function MonthlyReport(props) {
         <View style={monthlyReportModalStyle.cosumedDataContainer}>
           <Text style={monthlyReportModalStyle.sectionTitle}>Gastos Nutricionais {currentTimeType}</Text>
           <View style={monthlyReportModalStyle.dateInfoAndHelp}>
-            <Text style={monthlyReportModalStyle.sectionTitle}>{props.currentMonthAndYear}</Text>
             <Pressable style={monthlyReportModalStyle.sectionTitle}
-              onPress={() => console.log("HELP!")}
+              onPress={()=>setPrevMonth()}
             >
-              <Ionicons name="help-circle-outline" style={monthlyReportModalStyle.moreInfosIcon}/>
+              <Ionicons name="chevron-back-outline" style={monthlyReportModalStyle.monthChangerIcon}/>
+            </Pressable>
+            <View style={monthlyReportModalStyle.dateWithHelp}>
+              <Text style={monthlyReportModalStyle.sectionTitle}>{currentYearMonth}</Text>
+              <Pressable style={monthlyReportModalStyle.sectionTitle}
+                onPress={() => console.log("HELP!")}
+              >
+                <Ionicons name="help-circle-outline" style={monthlyReportModalStyle.moreInfosIcon}/>
+              </Pressable>
+            </View>
+            <Pressable style={monthlyReportModalStyle.sectionTitle}
+              onPress={()=>setNextMonth()}
+            >
+              <Ionicons name="chevron-forward-outline" style={monthlyReportModalStyle.monthChangerIcon}/>
             </Pressable>
           </View>
           
