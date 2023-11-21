@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { View, Text, Pressable, TextInput} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 import api from "../../../services/api";
 import { Auth } from 'aws-amplify';
@@ -26,49 +27,47 @@ export default function CreateFood({navigation}){
     const [showVitaminas, setShowVitaminas] = useState(false);
     
     async function handleValues(data){
+        console.log(data)
         if(data.name !== undefined && data.name !== ""){
             if(data.name[0] !== " "){
-                if(unidadeValue !== ""){
-                    const session = await Auth.currentSession();
-                    const idToken = session.getIdToken().getJwtToken();
-                    api.post("/nutrition/food",
-                    {
-                        name: data.name,
-                        unity: unidadeValue,
-                        energy: data.energy,
-                        fiber: data.fiber,
-                        protein: data.protein,
-                        lipids: data.lipids,
-                        cholesterol: data.cholesterol,
-                        carbo: data.carbo,
-                        calcium: data.calcium,
-                        magnesium: data.magnesium,
-                        manganese: data.manganese,
-                        phosphor: data.phosphor,
-                        iron: data.iron,
-                        sodium: data.sodium,
-                        potassium: data.potassium,
-                        zinc: data.zinc,
-                        saturated: data.saturated,
-                        monounsaturated: data.monounsaturated,
-                        polyunsaturated: data.polyunsaturated,
-                        b12: data.b12,
-                        b2: data.b2,
-                        b6: data.b6,
-                        b3: data.b3,
-                        vitaminC: data.vitaminC
+                const session = await Auth.currentSession();
+                const idToken = session.getIdToken().getJwtToken();
+                api.post("/nutrition/food",
+                {
+                    name: data.name,
+                    unity: unidadeValue,
+                    energy: data.energy,
+                    fiber: data.fiber,
+                    protein: data.protein,
+                    lipids: data.lipids,
+                    cholesterol: data.cholesterol,
+                    carbo: data.carbo,
+                    calcium: data.calcium,
+                    magnesium: data.magnesium,
+                    manganese: data.manganese,
+                    phosphor: data.phosphor,
+                    iron: data.iron,
+                    sodium: data.sodium,
+                    potassium: data.potassium,
+                    zinc: data.zinc,
+                    saturated: data.saturated,
+                    monounsaturated: data.monounsaturated,
+                    polyunsaturated: data.polyunsaturated,
+                    b1: data.b1,
+                    b2: data.b2,
+                    b6: data.b6,
+                    b3: data.b3,
+                    vitaminC: data.vitaminC
                     },{
-                    headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+                        headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
                     }).catch(function (error) {
                         console.error(error.message);
                     });
-                    navigation.navigate('Menu')
-                }else{
-                    alert("Selecione a unidade do Alimento!")} 
-            }else{
-                alert("O nome não pode começar com espaço em branco!")}
-        }else{
-            alert("Digite o nome do Alimento!")}
+                    // navigation.navigate('Menu')
+                }else
+                alert("O nome não pode começar com espaço em branco!")
+        }else
+            alert("Digite o nome do Alimento!")
     }
     return(
         <View style={formsBackgroundStyle.background}>
@@ -92,21 +91,10 @@ export default function CreateFood({navigation}){
                                 />
                             </View>
                             <Pressable
-                                style={formCreateStyle.inputPressableField}
+                                style={formCreateStyle.helpPressableContainer}
                                 onPress={() => setUnidadeModal(!unidadeModal)}
                             >
-                                <Controller
-                                control={control}
-                                name="unidade"
-                                render={({ field: { onChange, onBlur, value} })=>(
-                                    <TextInput
-                                        style = {formCreateStyle.unidadeLabel}
-                                        editable={false}
-                                        value = {unidadeValue}
-                                        placeholder = "Unidade"
-                                    />
-                                )}
-                            />
+                                <Ionicons name="help-outline" style={formCreateStyle.unidadeLabel} />
                             </Pressable>
                         </View>
                     </View>

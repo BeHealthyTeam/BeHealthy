@@ -46,7 +46,7 @@ export default function AuthenticatedStackRoutes(props){
             options={{ headerStyle: {
                 minHeight: 10,
                 },
-                title: "Calendario Nutricional",
+                title: "Calendário",
             }}
             />
       </AuthenticatedStack.Navigator>

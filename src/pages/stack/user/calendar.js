@@ -9,6 +9,7 @@ import api from "../../../services/api";
 
 import formsBackgroundStyle from "../../../styles/forms/formsBackgroundStyle";
 import calendarStyle from "../../../styles/componentUtils/calendarStyle";
+import MonthlyReport from "./modals/reports/monthlyReport";
 
 LocaleConfig.locales['br'] = {
     monthNames: [
@@ -41,9 +42,9 @@ export default function ControlCalendar({ navigation }) {
 
   const[controlMarkedDates, setControlMarkedDates] = useState({})
   const[currentMonthAndYear, setCurrentMonthAndYear] = useState()
-  const[activityData, setActivityData] = useState();
+  const[monthlyReportModal, setMonthlyReportModal] = useState(false)
+  const[mealMonthData, setMealMonthData] = useState();
 
-  
   useEffect(() => {
     setCurrentMonthAndYear(getCurrentDate().slice(0,7))
     }, []);
@@ -53,21 +54,27 @@ export default function ControlCalendar({ navigation }) {
     }, [currentMonthAndYear]);
 
   async function getAllDiariesFromMonthAndYear(){
-    const session = await Auth.currentSession();
-    const idToken = session.getIdToken().getJwtToken();
-    try{
-      const response = await api.get("/nutrition/meal/calendar/"+currentMonthAndYear,
-      {
-        headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
-      })
-      const data = response.data;
-      const markedDatesList = {}
-      data.forEach(element => {
-        markedDatesList[element.date] = {dots: [nut], selected: true, selectedColor: 'transparent'}
-      })
-      setControlMarkedDates(markedDatesList)
-    }catch(e){
-      console.log(e.message)
+    if(currentMonthAndYear != null){
+      const session = await Auth.currentSession();
+      const idToken = session.getIdToken().getJwtToken();
+      try{
+        const response = await api.get("/nutrition/meal/calendar/"+currentMonthAndYear,
+        {
+          headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
+        })
+        const data = response.data;
+        const markedDatesList = {}
+        setMealMonthData(data)
+        data.forEach(element => {
+          if(element.date == getCurrentDate()){
+            markedDatesList[element.date] = {dots: [nut],  selected: true, selectedColor: 'lightyellow'}
+          }
+          else markedDatesList[element.date] = {dots: [nut], selected: true, selectedColor: 'transparent'}
+        })
+        setControlMarkedDates(markedDatesList)
+      }catch(e){
+        console.log(e.message)
+      }
     }
   }
 
@@ -115,7 +122,6 @@ export default function ControlCalendar({ navigation }) {
       setCurrentMonthAndYear(currentMonthAndYear.slice(0, -2) + currentMonth)
     }
   }
-  
   return (
     <View style={formsBackgroundStyle.background}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -144,6 +150,30 @@ export default function ControlCalendar({ navigation }) {
             markedDates = {controlMarkedDates}
           />
         </View>
+        <View style = {formsBackgroundStyle.container}>
+          <Text style={formsBackgroundStyle.titleText}>Relatórios</Text>
+          <View style={formsBackgroundStyle.iconsContainer}>
+            <Pressable onPress={() => setMonthlyReportModal(!monthlyReportModal)}
+            >
+              <Ionicons name="nutrition-outline" style={formsBackgroundStyle.icon}/>
+            </Pressable>
+            <Pressable onPress={() => setMonthlyReportModal(!monthlyReportModal)}
+            >
+              <Ionicons name="barbell-outline" style={formsBackgroundStyle.icon}/>
+            </Pressable>
+            <Pressable onPress={() => setMonthlyReportModal(!monthlyReportModal)}
+            >
+              <Ionicons name="happy-outline" style={formsBackgroundStyle.icon}/>
+            </Pressable>
+          </View>
+        </View>
+
+        <MonthlyReport
+        monthlyReportModal = {monthlyReportModal}
+        setMonthlyReportModal = {setMonthlyReportModal}
+        currentMonthAndYear = {currentMonthAndYear}
+        mealMonthData = {mealMonthData}
+        />
       </ScrollView>
     </View>
   )

@@ -29,7 +29,7 @@ export default function CreateRecipe({ navigation }) {
                 name: data.name,
                 ingredients: ingredients,
             },{
-                headers: { "Authorization": Auth.user.signInUserSession.idToken.jwtToken },
+                headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
             }).then(function(response){
                 alert("Receita cadastrada com sucesso!")
                 navigation.navigate('Menu')

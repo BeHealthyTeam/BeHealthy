@@ -59,10 +59,8 @@ export default function Day({ navigation, route}) {
         }
     }
     async function getAllFromDateMeals(){
-        var YearAndMonth = fullDate.year + "-"+ fullDate.month;
         const session = await Auth.currentSession();
         const idToken = session.getIdToken().getJwtToken();
-        console.log(idToken)
         try{
             const response = await api.get("/nutrition/meal/"+ fullDate.dateString,
             {
@@ -74,10 +72,9 @@ export default function Day({ navigation, route}) {
         }
     }
     
-
     useEffect(()=>{
         getAllFromDateMeals()
-    }, [])
+    }, [mealDiaryData])
 
     return (
         <ScrollView style={formsBackgroundStyle.background}>

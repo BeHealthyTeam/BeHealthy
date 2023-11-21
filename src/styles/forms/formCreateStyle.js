@@ -42,10 +42,10 @@ const formCreateStyle = StyleSheet.create({
         color: "grey",
     },
     unidadeLabel:{
-        fontSize: 15,
+        fontSize: 20,
         color: "black",
         alignSelf: "center",
-        padding: 7
+        paddingTop: mobileWindow.height*0.015,
     },
     nutrientsSections:{
         marginVertical: 20,

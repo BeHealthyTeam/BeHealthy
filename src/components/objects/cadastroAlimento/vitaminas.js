@@ -6,10 +6,10 @@ export default function Vitaminas(props){
 return(
     <View style = {formSectionStyle.itemsContent}>
         <View style={formSectionStyle.itemRow}>
-            <Text style = { formSectionStyle.label}>Tiamina(B12) (mg):</Text>
+            <Text style = { formSectionStyle.label}>Tiamina(B1) (mg):</Text>
             <Controller
                 control={props.control}
-                name="b12"
+                name="b1"
                 render={({ field: { onChange, onBlur, value} })=>(
                     <TextInput
                         style = {formSectionStyle.input}
@@ -17,7 +17,7 @@ return(
                         onBlur = {onBlur}
                         value = {value}
                         defaultValue = '0'
-                        keyboardType="phone-pad"
+                        keyboardType="numeric"
                     />
                 )}
             />
@@ -34,7 +34,7 @@ return(
                         onBlur = {onBlur}
                         value = {value}
                         defaultValue = '0'
-                        keyboardType="phone-pad"
+                        keyboardType="numeric"
                     />
                 )}
             />
@@ -51,7 +51,7 @@ return(
                         onBlur = {onBlur}
                         value = {value}
                         defaultValue = '0'
-                        keyboardType="phone-pad"
+                        keyboardType="numeric"
                     />
                 )}
             />
@@ -68,7 +68,7 @@ return(
                         onBlur = {onBlur}
                         value = {value}
                         defaultValue = '0'
-                        keyboardType="phone-pad"
+                        keyboardType="numeric"
                     />
                 )}
             />
@@ -85,7 +85,7 @@ return(
                         onBlur = {onBlur}
                         value = {value}
                         defaultValue = '0'
-                        keyboardType="phone-pad"
+                        keyboardType="numeric"
                     />
                 )}
             />

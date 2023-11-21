@@ -23,9 +23,8 @@ export default function AddMeal(props) {
     const [selectedFoods, setSelectedFoods] = useState([]);
     const [selectedRecipes, setSelectedRecipes] = useState([]);
 
-    const [morningSelected, setMorningSelected] = useState(true);
-    const [middaySelected, setMiddaySelected] = useState(false);
-    const [nightSelected, setNightSelected] = useState(false);
+    const [dayTurn, setDayTurn] = useState("Morning");
+
 
     async function separateValues(){
         setSelectedFoods([])
@@ -61,24 +60,22 @@ export default function AddMeal(props) {
     async function handleValues(foods, recipes){
         const session = await Auth.currentSession();
         const idToken = session.getIdToken().getJwtToken();
-
-        if(morningSelected){
-            api.post("/nutrition/meal", {
-                userId: Auth.user.attributes.email,
-                date: props.fullDate.dateString,
-                dayTurn: "morning",
-                foodsMeal: foods,
-                recipesMeal: recipes,
-            },{
-                headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
-            }).catch(function (error) {
-                console.error(error.message);
-            });
-            alert("Sucess!")
-            props.getAllDiariesFromMonthAndYear()
-            props.getAllFromDateMeals()
-            props.setAddMealModal(false)
-        }
+        api.post("/nutrition/meal", {
+            userId: Auth.user.attributes.email,
+            date: props.fullDate.dateString,
+            dayTurn: dayTurn,
+            foodsMeal: foods,
+            recipesMeal: recipes,
+        },{
+            headers: { "Authorization": "Bearer " +Auth.user.signInUserSession.idToken.jwtToken },
+        }).catch(function (error) {
+            console.error(error.message);
+        });
+        alert("Sucess!")
+        setMeals([])
+        // props.getAllDiariesFromMonthAndYear()
+        props.getAllFromDateMeals()
+        props.setAddMealModal(false)
     }
 
     return (
@@ -97,14 +94,12 @@ export default function AddMeal(props) {
                         <Pressable
                             style={formCreateStyle.timeIcon}
                             onPress={() => {
-                                setMorningSelected(!morningSelected)
-                                setMiddaySelected(false)
-                                setNightSelected(false)
+                                setDayTurn("Morning")
                             }}
                             title="submit"
                         >
                             {
-                                morningSelected ? 
+                                dayTurn == "Morning" ? 
                                 <Ionicons name="partly-sunny-outline" style={formCreateStyle.turnIconLabelSelected}/>
                                     :
                                 <Ionicons name="partly-sunny-outline" style={formCreateStyle.turnIconLabel}/>
@@ -114,14 +109,12 @@ export default function AddMeal(props) {
                         <Pressable
                             style={formCreateStyle.timeIcon}
                             onPress={() => {
-                                setMorningSelected(false)
-                                setMiddaySelected(!middaySelected)
-                                setNightSelected(false)
+                                setDayTurn("Midday")
                             }}
                             title="submit"
                         >
                             {
-                                middaySelected ? 
+                                dayTurn == "Midday"  ? 
                                 <Ionicons name="sunny-outline" style={formCreateStyle.turnIconLabelSelected}/>
                                     :
                                 <Ionicons name="sunny-outline" style={formCreateStyle.turnIconLabel}/>
@@ -130,14 +123,12 @@ export default function AddMeal(props) {
                         <Pressable
                             style={formCreateStyle.timeIcon}
                             onPress={() => {
-                                setMorningSelected(false)
-                                setMiddaySelected(false)
-                                setNightSelected(!nightSelected)
+                                setDayTurn("Night")
                             }}
                             title="submit"
                         >
                             {
-                                nightSelected ? 
+                                dayTurn == "Night"  ? 
                                 <Ionicons name="moon-outline" style={formCreateStyle.turnIconLabelSelected}/>
                                     :
                                 <Ionicons name="moon-outline" style={formCreateStyle.turnIconLabel}/>

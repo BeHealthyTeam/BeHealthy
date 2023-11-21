@@ -1,6 +1,5 @@
 import { Pressable, View } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons'
-import Icon from 'react-native-ionicons'
 
 import modulesStyle from "../../styles/componentModules/modulesStyle";
 

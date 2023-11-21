@@ -18,7 +18,7 @@ return(
                         onBlur = {onBlur}
                         value = {value}
                         defaultValue = '0'
-                        keyboardType="phone-pad"
+                        keyboardType="numeric"
                     />
                 )}
             />

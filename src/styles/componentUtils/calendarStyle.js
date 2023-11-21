@@ -29,7 +29,7 @@ const calendarStyle = StyleSheet.create({
         monthTextColor: 'black',
         textDayFontWeight: '300',
         textMonthFontWeight: 'bold',
-        textDayHeaderFontWeight: '250',
+        textDayHeaderFontWeight: '200',
         textDayFontSize: 20,
         textMonthFontSize: 15,
         textDayHeaderFontSize: 15,

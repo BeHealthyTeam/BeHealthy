@@ -43,6 +43,19 @@ const formsBackgroundStyle = StyleSheet.create({
         alignSelf: "center",
         color: "white",
     },
+    titleText:{
+        fontSize: 15,
+        textAlign: "center",
+        fontWeight: "bold"
+    },
+    iconsContainer:{
+        flexDirection: "row",
+        justifyContent:"space-evenly",
+        marginTop: mobileWindow.height*0.03,
+    },
+    icon:{
+        fontSize: 35,
+    },
 
 })
 

@@ -2,13 +2,14 @@ import { useState, useEffect} from "react"
 import { View, Text, SafeAreaView, Pressable} from "react-native"
 import { Image } from "react-native-elements"
 import Ionicons from '@expo/vector-icons/Ionicons'
-// Backend imports
+
 import { Auth } from "aws-amplify"
 import api from "../../../services/api"
-import EditUser from "./modal/editUser"
-// Style import
+import EditUser from "./modals/editUser"
+import DetailUser from "./modals/detailUser"
+
 import profileComponentStyle from "../../../styles/componentObjects/profileComponentStyle"
-import DetailUser from "./modal/detailUser"
+
 
 export default function User(props){
     
